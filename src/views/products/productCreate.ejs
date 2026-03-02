@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', { title: 'Admin - Crear Nuevo Producto' , cssFile: 'forms.css' }) %>
+
+    <body>
+        <!-- Asumo que el administrador ya está logueado -->
+        <%- include('../partials/header') %>
+
+            <main>
+                <section class="form-container" style="max-width: 700px;">
+                    <h1 class="form-title">Crear Nuevo Producto</h1>
+                    <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
+                        Complete los datos para dar de alta un articulo en el E-Commerce
+                    </p>
+
+                    <!-- El action apuntará a /products almacenando los datos (POST) -->
+                    <form action="#" method="get" class="admin-form">
+
+                        <!-- Nombre -->
+                        <div class="form-group">
+                            <label for="name">Nombre del Producto *</label>
+                            <input type="text" id="name" name="name" placeholder="Ej: Batería iPhone 12 Pro" required>
+                        </div>
+
+                        <!-- Precio y Categoría en línea -->
+                        <div class="form-row" style="display: flex; gap: 15px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="price">Precio (USD) *</label>
+                                <input type="number" id="price" name="price" placeholder="Ej: 45.00" step="0.01"
+                                    required>
+                            </div>
+
+                            <div class="form-group" style="flex: 1;">
+                                <label for="category">Categoría *</label>
+                                <select id="category" name="category" class="form-control" required
+                                    style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="celulares">Celulares</option>
+                                    <option value="herramientas">Herramientas</option>
+                                    <option value="repuestos">Repuestos</option>
+                                    <option value="accesorios">Accesorios</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Imagen (Simulación de carga de archivo) -->
+                        <div class="form-group">
+                            <label for="image">Subir Imagen del Producto *</label>
+                            <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp"
+                                required style="padding: 10px 0;">
+                        </div>
+
+                        <!-- Colores disponibles (Checkboxes) -->
+                        <div class="form-group">
+                            <label>Colores Disponibles (Opcional)</label>
+                            <div class="checkbox-group" style="display: flex; gap: 15px; margin-top: 5px;">
+                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="negro">
+                                    Negro</label>
+                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="blanco">
+                                    Blanco</label>
+                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="gris">
+                                    Gris</label>
+                            </div>
+                        </div>
+
+                        <!-- Descripción detallada -->
+                        <div class="form-group">
+                            <label for="description">Descripción Detallada *</label>
+                            <textarea id="description" name="description" rows="5"
+                                placeholder="Ingrese las características técnicas y detalle del producto..." required
+                                style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                        </div>
+
+                        <div class="form-actions" style="display: flex; gap: 15px; margin-top: 30px;">
+                            <button type="button" class="btn-secondary"
+                                style="flex: 1; padding: 12px; border-radius: 5px; cursor:pointer;"
+                                onclick="window.history.back()">Cancelar</button>
+                            <button type="submit" class="btn-submit" style="flex: 2; margin-top: 0;">Guardar Nuevo
+                                Producto</button>
+                        </div>
+
+                    </form>
+                </section>
+            </main>
+
+            <%- include('../partials/footer') %>
+
+    </body>
+
+</html>

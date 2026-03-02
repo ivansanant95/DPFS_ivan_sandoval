@@ -1,41 +1,52 @@
 [
-    {
-        "id": 1,
-        "name": "Módulo Pantalla Original para iPhone X",
-        "description": "Módulo de pantalla táctil LCD OLED original para Apple iPhone X. Incluye marco ensamblado para una instalación más sencilla y segura. Testeada en laboratorio para evitar píxeles muertos. Requiere herramientas profesionales para su colocación.",
-        "price": 120,
-        "category": "repuestos",
-        "image": "https://via.placeholder.com/400x400?text=Pantalla+iPhone+X",
-        "colors": [
-            "negro",
-            "gris"
-        ]
-    },
-    {
-        "id": 2,
-        "name": "Kit de Herramientas Premium 54 piezas",
-        "description": "El set definitivo para técnicos en reparación de celulares y computadoras. Incluye destornilladores magnéticos de precisión (Pentalobe, Torx, Phillips), pinzas antiestáticas, spudgers y ventosa de sujeción.",
-        "price": 45,
-        "category": "herramientas",
-        "image": "https://via.placeholder.com/400x400?text=Kit+Herramientas",
-        "colors": []
-    },
-    {
-        "id": 3,
-        "name": "Batería Original Samsung S21",
-        "description": "Batería de repuesto 100% original para Samsung Galaxy S21 (G991). Capacidad: 4000 mAh. Restaura la autonomía de tu dispositivo como el primer día.",
-        "price": 35,
-        "category": "repuestos",
-        "image": "https://via.placeholder.com/400x400?text=Bateria+Samsung+S21",
-        "colors": []
-    },
-    {
-        "id": 4,
-        "name": "Estación de Soldado Profesional",
-        "description": "Estación de soldado digital regulable con pistola de calor. Ideal para reballing y reparación de componentes SMD en placas madre de telefonía móvil. Rango de temperatura: 100°C - 480°C.",
-        "price": 85,
-        "category": "herramientas",
-        "image": "https://via.placeholder.com/400x400?text=Estacion+Soldado",
-        "colors": []
-    }
+  {
+    "id": 1,
+    "name": "Módulo Pantalla Original para iPhone X",
+    "description": "Módulo de pantalla táctil LCD OLED original para Apple iPhone X. Incluye marco ensamblado para una instalación más sencilla y segura. Testeada en laboratorio para evitar píxeles muertos. Requiere herramientas profesionales para su colocación.",
+    "price": 120,
+    "category": "repuestos",
+    "image": "https://via.placeholder.com/400x400?text=Pantalla+iPhone+X",
+    "colors": [
+      "negro",
+      "gris"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Kit de Herramientas Premium 54 piezas",
+    "description": "El set definitivo para técnicos en reparación de celulares y computadoras. Incluye destornilladores magnéticos de precisión (Pentalobe, Torx, Phillips), pinzas antiestáticas, spudgers y ventosa de sujeción.",
+    "price": 45,
+    "category": "herramientas",
+    "image": "https://via.placeholder.com/400x400?text=Kit+Herramientas",
+    "colors": []
+  },
+  {
+    "id": 3,
+    "name": "Batería Original Samsung S21",
+    "description": "Batería de repuesto 100% original para Samsung Galaxy S21 (G991). Capacidad: 4000 mAh. Restaura la autonomía de tu dispositivo como el primer día.",
+    "price": 35,
+    "category": "repuestos",
+    "image": "https://via.placeholder.com/400x400?text=Bateria+Samsung+S21",
+    "colors": []
+  },
+  {
+    "id": 4,
+    "name": "Estación de Soldado Profesional",
+    "description": "Estación de soldado digital regulable con pistola de calor. Ideal para reballing y reparación de componentes SMD en placas madre de telefonía móvil. Rango de temperatura: 100°C - 480°C.",
+    "price": 85,
+    "category": "herramientas",
+    "image": "https://via.placeholder.com/400x400?text=Estacion+Soldado",
+    "colors": []
+  },
+  {
+    "id": 5,
+    "name": "Auriculares Bluetooth Pila",
+    "description": "Auricular super bueno",
+    "price": 50,
+    "category": "accesorios",
+    "image": "https://via.placeholder.com/400x400?text=Nuevo+Producto",
+    "colors": [
+      "negro"
+    ]
+  }
 ]

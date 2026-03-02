@@ -1,22 +1,32 @@
 [
-    {
-        "id": 1,
-        "firstName": "Admin",
-        "lastName": "Principal",
-        "email": "admin@reparatech.com",
-        "password": "$2b$10$UnHashSimuladoDeContrasenaSegura123",
-        "category": "admin",
-        "image": "default-avatar.png",
-        "phone": "+54 11 1234 5678"
-    },
-    {
-        "id": 2,
-        "firstName": "Juan",
-        "lastName": "Pérez",
-        "email": "juanperez@ejemplo.com",
-        "password": "$2b$10$OtroHashSimuladoDeContrasenaSegura456",
-        "category": "customer",
-        "image": "default-avatar.png",
-        "phone": "+54 221 555 1234"
-    }
+  {
+    "id": 1,
+    "firstName": "Admin",
+    "lastName": "Principal",
+    "email": "admin@reparatech.com",
+    "password": "$2b$10$UnHashSimuladoDeContrasenaSegura123",
+    "category": "admin",
+    "image": "default-avatar.png",
+    "phone": "+54 11 1234 5678"
+  },
+  {
+    "id": 2,
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "email": "juanperez@ejemplo.com",
+    "password": "$2b$10$OtroHashSimuladoDeContrasenaSegura456",
+    "category": "customer",
+    "image": "default-avatar.png",
+    "phone": "+54 221 555 1234"
+  },
+  {
+    "id": 3,
+    "firstName": "Maria",
+    "lastName": "Perez",
+    "email": "maria@mail.com",
+    "password": "$2b$10$Q7DxlpTYPoEMokX3kndSu.8Y18Jtl7NO7gI29I36qjt/tkHtQrXoG",
+    "category": "customer",
+    "image": "avatar-1772487210526-473951816.png",
+    "phone": ""
+  }
 ]

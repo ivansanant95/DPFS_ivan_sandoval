@@ -97,6 +97,22 @@ const productsController = {
         } else {
             res.status(404).send('No se pudo actualizar el producto');
         }
+    },
+
+    // Elimina un producto de la base de datos
+    destroy: (req, res) => {
+        const productsFilePath = path.join(__dirname, '../data/products.json');
+        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+        const productId = parseInt(req.params.id, 10);
+
+        // Filtramos: Nos quedamos con todos los productos MENOS el que queremos borrar
+        const remainingProducts = products.filter(p => p.id !== productId);
+
+        // Sobrescribimos el archivo JSON
+        fs.writeFileSync(productsFilePath, JSON.stringify(remainingProducts, null, 2), 'utf-8');
+
+        // Redirigimos al home
+        res.redirect('/');
     }
 };
 

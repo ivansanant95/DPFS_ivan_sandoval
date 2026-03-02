@@ -81,14 +81,19 @@
                             <button type="button" class="btn-secondary"
                                 style="flex: 1; padding: 12px; border-radius: 5px; cursor:pointer;"
                                 onclick="window.history.back()">Cancelar</button>
-                            <!-- Simulated destroy button -->
-                            <button type="button"
-                                style="padding: 12px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor:pointer;"
-                                onclick="alert('Funcionalidad de borrado en desarrollo')">🗑️ Borrar</button>
+                            <!-- Submit del Formulario PADRE (Edición) -->
                             <button type="submit" class="btn-submit"
                                 style="flex: 2; margin-top: 0; background-color: #27ae60;">Guardar Cambios</button>
                         </div>
+                    </form>
 
+                    <!-- Formulario de Borrado Independiente -->
+                    <form action="/products/<%= product.id %>?_method=DELETE" method="POST"
+                        style="margin-top: 15px; display: flex;">
+                        <button type="submit"
+                            style="flex: 1; padding: 12px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor:pointer;"
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar este producto definitivamente?')">🗑️
+                            Borrar Producto</button>
                     </form>
                 </section>
             </main>

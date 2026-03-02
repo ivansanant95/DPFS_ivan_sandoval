@@ -39,16 +39,5 @@
     "category": "herramientas",
     "image": "https://via.placeholder.com/400x400?text=Estacion+Soldado",
     "colors": []
-  },
-  {
-    "id": 5,
-    "name": "Auriculares Bluetooth Pila",
-    "description": "Auricular super bueno",
-    "price": 50,
-    "category": "accesorios",
-    "image": "https://via.placeholder.com/400x400?text=Nuevo+Producto",
-    "colors": [
-      "negro"
-    ]
   }
 ]

@@ -1,21 +1,19 @@
-# Retrospectiva - Sprint 3 (Estrella de Mar)
+# Retrospectiva del Proyecto (Estrella de Mar)
 
-A continuación se detallan las conclusiones al finalizar el tercer sprint de desarrollo (Motor de Plantillas y MVC).
+---
 
-## 🌟 Comenzar a hacer
-*   **Planificar las Rutas con precisión:** Ser muy cuidadosos con los métodos HTTP (GET, POST, PUT, DELETE) y asegurar que cada vista apunte a la ruta correcta.
-*   **Manejo de IDs:** Empezar a pensar cómo pasaremos el Identificador Único (`id`) de los productos a través de las rutas URL (ej: `/products/12/edit`).
+## 🚀 Sprints 4 y 5: Datos y Seguridad (JSON, CRUD, Bcrypt, Sesiones y Multer)
 
-## 📈 Hacer más
-*   **Testing de Servidor Local:** Levantar el servidor (`node src/app.js`) y navegar la página constantemente luego de cada cambio para corregir errores de enrutamiento rápido.
+### 🌟 Comenzar a hacer
+*   **Gestión Centralizada de Middlewares:** Tratar de crear módulos de funciones middlewares más reutilizables y limpios para mantener el archivo de enrutadores (`usersRoutes.js`) sin sobrecarga de código.
+*   **Validaciones en Frontend:** Comenzar a agregar validaciones del lado del cliente antes de enviar la petición (ej. corroborar que el email sea válido o la contraseña tenga cierta longitud usando Javascript del navegador).
 
+### 📈 Hacer más
+*   **Uso de Variables de Entorno (.env):** Ocultar parámetros de seguridad (como la palabra secreta de las Cookies `ReparatechSecretKey2026`) de un archivo público a un entorno privado por seguridad.
 
-## 🔁 Continuar haciendo
-*   **Separación MVC (Modelo-Vista-Controlador):** La estructura `/src` dividida en views, routes y controllers ha dejado el proyecto muy ordenado.
-*   **Uso de Partials:** Mantener y extender el uso de EJS para no repetir código HTML.
+### 🔁 Continuar haciendo
 
-## 📉 Hacer menos
-*   **Código Hardcodeado:** Usar variables pasadas desde el Controlador.
+### 📉 Hacer menos
 
-## 🛑 Dejar de hacer
-*   **Enlaces HTML quemados:** Olvidarnos de actualizar los `href` o los `action` de los formularios al mover archivos. Debemos revisarlos siempre
+### 🛑 Dejar de hacer
+*   **Subir contraseñas limpias a la RAM temporal (`req.session`):** Borrar el "password hasheado" antes de guardar el registro en caché local, después de instanciar el session id para optimizar la seguridad en caso de volcado de la memoria del servidor.

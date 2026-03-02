@@ -29,7 +29,7 @@ const usersController = {
 
                 // Setear Cookie si el usuario tildó "Recordarme"
                 if (req.body.remember) {
-                    // Cookie vive 60 minutos (ejemplo: 1000 * 60 * 60)
+                    // Cookie vive 60 minutos 
                     res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60 * 60) });
                 }
 

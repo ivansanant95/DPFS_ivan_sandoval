@@ -1,0 +1,229 @@
+/* =========================================
+   VARIABLES GLOBALES (Paleta y Tipografía)
+   ========================================= */
+:root {
+  /* Paleta de Colores (Azul Tech y Naranja/Amarillo) */
+  --primary-color: #0056b3;
+  --primary-hover: #003d82;
+  --secondary-color: #ff9900;
+  --secondary-hover: #e68a00;
+  --bg-color: #f8f9fa;
+  --text-main: #333333;
+  --text-light: #666666;
+  --white: #ffffff;
+  --border-color: #e0e0e0;
+
+  /* Tipografía */
+  --font-main: 'Roboto', sans-serif;
+}
+
+/* =========================================
+   RESETEOS BÁSICOS
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Fundamental para evitar desbordes con padding/border */
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Para que el footer siempre quede abajo */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  /* Hereda el color del padre para no verse azul por defecto */
+}
+
+ul {
+  list-style: none;
+  /* Quitamos las viñetas */
+}
+
+/* =========================================
+   HEADER y NAVEGACIÓN 
+   ========================================= */
+.main-header {
+  background-color: var(--white);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  /* Fija el header al hacer scroll */
+  top: 0;
+  z-index: 100;
+  /* Asegura que se vea por sobre el resto */
+}
+
+/* Contenedor principal del encabezado (Logo, Buscador, Acciones) */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logotipo */
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.logo span {
+  color: var(--secondary-color);
+}
+
+/* Barra de Búsqueda */
+.search-bar {
+  display: flex;
+  flex-grow: 1;
+  max-width: 500px;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+  background-color: var(--secondary-hover);
+}
+
+/* Acciones de usuario */
+.user-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.user-actions a {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-login {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-login:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-cart {
+  background-color: var(--primary-color);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-cart:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Navegación Inferior (Categorías) */
+.main-nav {
+  background-color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 10px 5%;
+}
+
+.nav-links a {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+main {
+  flex-grow: 1;
+  /* Ocupa todo el espacio restante empujando el footer abajo */
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px 5%;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.main-footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 40px 5% 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* Para hacerlo responsive después */
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.footer-section h3 {
+  color: var(--white);
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.footer-section p,
+.footer-section a {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-section a:hover {
+  color: var(--secondary-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #444;
+  font-size: 12px;
+}

@@ -1,17 +1,21 @@
-# Retrospectiva - Sprint 2 (Estrella de Mar)
+# Retrospectiva - Sprint 3 (Estrella de Mar)
 
-A continuación se detalla el análisis del segundo sprint de desarrollo (Maquetación Estática), utilizando la dinámica de la Estrella de Mar.
+A continuación se detallan las conclusiones al finalizar el tercer sprint de desarrollo (Motor de Plantillas y MVC).
 
 ## 🌟 Comenzar a hacer
-*   **Pensar en componentes (Partials):** Comenzar a utilizar plantillas dinámicas (EJS) para escribir ese código una sola vez y que no se repita codigo.
-*   **Estructura de Carpetas MVC:** Antes de codificar el backend, debemos establecer una estructura clara separando Rutas, Controladores y Vistas.
+*   **Planificar las Rutas con precisión:** Ser muy cuidadosos con los métodos HTTP (GET, POST, PUT, DELETE) y asegurar que cada vista apunte a la ruta correcta.
+*   **Manejo de IDs:** Empezar a pensar cómo pasaremos el Identificador Único (`id`) de los productos a través de las rutas URL (ej: `/products/12/edit`).
 
 ## 📈 Hacer más
-*   **Uso de Flexbox:** La implementación de flexbox para la grilla de productos y el layout general demostró ser muy eficiente y responsiva. Debemos seguir profundizando en su uso.
+*   **Testing de Servidor Local:** Levantar el servidor (`node src/app.js`) y navegar la página constantemente luego de cada cambio para corregir errores de enrutamiento rápido.
+
 
 ## 🔁 Continuar haciendo
-*   **Revisión en distintos tamaños de pantalla:** Validar la responsividad (Media Queries) fue útil y debe mantenerse en las futuras vistas.
-*   **Separación de CSS:** Mantener un CSS global (`style.css`) y CSS específicos por página evitó.
+*   **Separación MVC (Modelo-Vista-Controlador):** La estructura `/src` dividida en views, routes y controllers ha dejado el proyecto muy ordenado.
+*   **Uso de Partials:** Mantener y extender el uso de EJS para no repetir código HTML.
 
 ## 📉 Hacer menos
-*   **Código HTML duplicado:** Reducir a cero la copia y pega de etiquetas head, header y footer gracias a los motores de plantillas.
+*   **Código Hardcodeado:** Usar variables pasadas desde el Controlador.
+
+## 🛑 Dejar de hacer
+*   **Enlaces HTML quemados:** Olvidarnos de actualizar los `href` o los `action` de los formularios al mover archivos. Debemos revisarlos siempre

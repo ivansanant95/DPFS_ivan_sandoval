@@ -1,8 +1,15 @@
 const express = require('express');
 const path = require('path');
 
+const methodOverride = require('method-override'); // Permite usar PUT y DELETE
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Configuración Middlewares para Formularios y JSON
+app.use(express.urlencoded({ extended: false })); // Permite capturar información de formularios (req.body)
+app.use(express.json()); // Permite capturar JSON
+app.use(methodOverride('_method')); // Permite pisar el método POST por PUT/DELETE (?_method=PUT)
 
 // Configuración de recursos estáticos (CSS, Imágenes)
 app.use(express.static(path.join(__dirname, '../public')));

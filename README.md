@@ -19,6 +19,11 @@ Nuestro mercado apunta a dos grandes segmentos (B2C y B2B):
 
 ¡Hola! Soy **Iván Sandoval**, estudiante de 5to año de Ingeniería en Computación de la Universidad Nacional de La Plata (UNLP). Apasionado por la tecnología, el desarrollo de software y la resolución de problemas lógicos y arquitectónicos en aplicaciones web modernas.
 
+## 📋 Tablero de Trabajo Ágil
+
+El seguimiento de las tareas y Sprints de este proyecto se realiza utilizando la metodología Kanban. Puedes ver el progreso en tiempo real del tablero:
+* **[Ir al Tablero de Trello de Reparatech](https://trello.com/b/NHXawamd/reparatech-e-commerce)** *(Nota: Reemplaza este enlace con tu URL real)*
+
 ## 🔍 Sitios de Referencia (Inspiración)
 
 Para garantizar la mejor experiencia de usuario (UX) y una interfaz de usuario (UI) estética y funcional, tome como inspiración los siguientes referentes del mercado:

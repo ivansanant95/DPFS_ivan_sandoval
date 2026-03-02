@@ -1,0 +1,25 @@
+{
+  "name": "dpfs_ivan_sandoval",
+  "version": "1.0.0",
+  "description": "Bienvenido al repositorio oficial de **Reparatech**, un e-commerce integral dedicado al ecosistema de la telefonía móvil, desarrollado como parte del proyecto final Full Stack en Digital House.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivansanant95/DPFS_ivan_sandoval.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ivansanant95/DPFS_ivan_sandoval/issues"
+  },
+  "homepage": "https://github.com/ivansanant95/DPFS_ivan_sandoval#readme",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
+  }
+}

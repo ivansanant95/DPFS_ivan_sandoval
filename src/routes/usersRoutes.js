@@ -4,6 +4,10 @@ const path = require('path');
 const multer = require('multer');
 const usersController = require('../controllers/usersController');
 
+// Importar Middlewares de Seguridad
+const guestMiddleware = require('../middlewares/guestMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 // Configuración de Multer para Fotos de Usuario
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -17,10 +21,16 @@ const storage = multer.diskStorage({
 const uploadFile = multer({ storage });
 
 // Rutas de Usuarios
-router.get('/login', usersController.login);
+// (Solo visitantes sin cuenta pueden ver Login y Registro)
+router.get('/login', guestMiddleware, usersController.login);
 router.post('/login', usersController.processLogin);
 
-router.get('/register', usersController.register);
+router.get('/register', guestMiddleware, usersController.register);
 router.post('/register', uploadFile.single('avatar'), usersController.processRegister);
+
+// Rutas Restringidas
+// (Solo usuarios logueados pueden ver su Perfil y desloguearse)
+router.get('/profile', authMiddleware, usersController.profile);
+router.post('/logout', usersController.logout);
 
 module.exports = router;

@@ -78,6 +78,20 @@ const usersController = {
 
         // Redirigir al login para que inicie sesión con su nueva cuenta
         res.redirect('/login');
+    },
+
+    // Renderiza el Perfil del usuario autenticado
+    profile: (req, res) => {
+        // Obtenemos los datos desde la Sesión Temporal
+        return res.render('users/profile', {
+            user: req.session.userLogged
+        });
+    },
+
+    // Destruye la sesión y desloguea al usuario
+    logout: (req, res) => {
+        req.session.destroy();
+        return res.redirect('/');
     }
 };
 

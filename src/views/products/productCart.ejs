@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', { title: 'Reparatech - Mi Carrito de Compras' , cssFile: 'cart.css' }) %>
+
+    <body>
+
+        <%- include('../partials/header') %>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <main>
+                <h1 class="cart-title">Mi Carrito de Compras (2 Productos)</h1>
+
+                <section class="cart-layout">
+
+                    <!-- Lista de Productos agregados (Izquierda) -->
+                    <div class="cart-items-container">
+
+                        <!-- Ítem 1 -->
+                        <article class="cart-item">
+                            <div class="item-img-title">
+                                <img src="https://via.placeholder.com/60x60?text=Pantalla" alt="Pantalla iPhone X">
+                                <h4>Módulo Pantalla iPhone X Original</h4>
+                            </div>
+
+                            <div class="item-quantity">
+                                <button type="button">-</button>
+                                <input type="text" value="1" readonly>
+                                <button type="button">+</button>
+                            </div>
+
+                            <div class="item-price">$120.00</div>
+                            <button type="button" class="btn-remove">🗑️ Eliminar</button>
+                        </article>
+
+                        <!-- Ítem 2 -->
+                        <article class="cart-item">
+                            <div class="item-img-title">
+                                <img src="https://via.placeholder.com/60x60?text=Kit" alt="Kit Herramientas">
+                                <h4>Kit de Herramientas Premium</h4>
+                            </div>
+
+                            <div class="item-quantity">
+                                <button type="button">-</button>
+                                <input type="text" value="1" readonly>
+                                <button type="button">+</button>
+                            </div>
+
+                            <div class="item-price">$45.00</div>
+                            <button type="button" class="btn-remove">🗑️ Eliminar</button>
+                        </article>
+
+                    </div>
+
+                    <!-- Resumen de Pago (Derecha) -->
+                    <aside class="cart-summary">
+                        <h3>Resumen de la compra</h3>
+
+                        <div class="summary-row">
+                            <span>Subtotal de productos:</span>
+                            <span>$165.00</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Envío estimado:</span>
+                            <span>$10.00</span>
+                        </div>
+
+                        <div class="summary-total">
+                            <span>Total a Pagar:</span>
+                            <span>$175.00</span>
+                        </div>
+
+                        <button class="btn-checkout">Continuar al Pago</button>
+                    </aside>
+
+                </section>
+            </main>
+
+            <%- include('../partials/footer') %>
+
+    </body>
+
+</html>

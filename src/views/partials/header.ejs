@@ -9,11 +9,11 @@
             <button type="button">Buscar</button>
         </div>
         <div class="user-actions">
-            <!-- Evaluamos si estamos en la vista de login para no mostrar el botón de "Ingresar" -->
+            <!-- vista de login para no mostrar el botón de "Ingresar" -->
             <% if (typeof hideLoginBtn==='undefined' || !hideLoginBtn) { %>
                 <a href="/login" class="btn-login">Ingresar</a>
                 <% } %>
-                    <a href="/cart" class="btn-cart">🛍️ Carrito (0)</a>
+                    <a href="/products/cart" class="btn-cart">🛍️ Carrito (0)</a>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
             <li><a href="#">Servicio Técnico</a></li>
             <li><a href="#">Repuestos</a></li>
             <li><a href="#">Herramientas</a></li>
-            <!-- Evaluamos si estamos en la vista de registro -->
+            <!-- vista de registro -->
             <% if (typeof hideRegisterBtn==='undefined' || !hideRegisterBtn) { %>
                 <li><a href="/register">Crear Cuenta</a></li>
                 <% } %>

@@ -14,10 +14,12 @@ app.set('views', path.join(__dirname, 'views'));
 // Importación de Enrutadores
 const mainRoutes = require('./routes/mainRoutes');
 const usersRoutes = require('./routes/usersRoutes');
+const productsRoutes = require('./routes/productsRoutes');
 
 // Uso de Rutas
 app.use('/', mainRoutes);
 app.use('/', usersRoutes);
+app.use('/', productsRoutes);
 
 // Levantar el servidor
 app.listen(PORT, () => {

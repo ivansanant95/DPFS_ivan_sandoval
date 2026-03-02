@@ -2,5 +2,155 @@
    ESTILOS ESPECÍFICOS: PÁGINA HOME
    ========================================= */
 
-/* Este archivo está conectado a views/index.html 
-   y será completado (Banner y Grilla de Productos) */
+/* --- Banner Principal --- */
+.home-banner {
+   background-color: var(--primary-color);
+   background-image: linear-gradient(135deg, var(--primary-color) 0%, #002d5e 100%);
+   color: var(--white);
+   padding: 80px 20px;
+   text-align: center;
+   border-radius: 8px;
+   margin-bottom: 40px;
+}
+
+.banner-content h1 {
+   font-size: 36px;
+   margin-bottom: 15px;
+}
+
+.banner-content p {
+   font-size: 18px;
+   margin-bottom: 30px;
+   opacity: 0.9;
+}
+
+.btn-primary {
+   display: inline-block;
+   background-color: var(--secondary-color);
+   color: var(--white);
+   padding: 12px 30px;
+   border-radius: 5px;
+   font-size: 16px;
+   font-weight: bold;
+   transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+   background-color: var(--secondary-hover);
+}
+
+/* --- Productos Destacados --- */
+.section-title {
+   font-size: 28px;
+   color: var(--primary-color);
+   margin-bottom: 30px;
+   text-align: center;
+}
+
+/* Grilla responsive usando Flexbox */
+.product-grid {
+   display: flex;
+   flex-wrap: wrap;
+   /* Permite que los productos pasen a la siguiente línea si no caben */
+   gap: 20px;
+   /* Espacio entre las tarjetas */
+   justify-content: space-between;
+}
+
+/* Tarjeta de Producto Individual (Modelo de Caja) */
+.product-card {
+   background-color: var(--white);
+   border: 1px solid var(--border-color);
+   border-radius: 8px;
+   width: calc(25% - 15px);
+   /* 4 columnas (restamos márgenes) */
+   min-width: 200px;
+   overflow: hidden;
+   /* Para que la imagen no se salga en las esquinas curvas */
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+   display: flex;
+   flex-direction: column;
+}
+
+.product-card:hover {
+   transform: translateY(-5px);
+   /* Efecto de levitar */
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+   width: 100%;
+   height: 200px;
+   background-color: #f0f0f0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-bottom: 1px solid #eee;
+}
+
+.product-image img {
+   max-width: 100%;
+   max-height: 100%;
+   object-fit: contain;
+   /* Ajusta la imagen sin deformarla */
+}
+
+.product-info {
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   /* Empuja el botón hacia abajo cuando los títulos tienen diferentes alturas */
+}
+
+.product-info h3 {
+   font-size: 16px;
+   margin-bottom: 10px;
+   color: var(--text-main);
+   flex-grow: 1;
+}
+
+.price {
+   font-size: 20px;
+   font-weight: bold;
+   color: var(--primary-color);
+   margin-bottom: 15px;
+}
+
+.btn-secondary {
+   display: block;
+   text-align: center;
+   background-color: var(--white);
+   color: var(--primary-color);
+   border: 2px solid var(--primary-color);
+   padding: 10px;
+   border-radius: 4px;
+   font-weight: bold;
+   transition: all 0.3s ease;
+}
+
+.product-card:hover .btn-secondary {
+   background-color: var(--primary-color);
+   color: var(--white);
+}
+
+/* =========================================
+   MEDIA QUERIES (Responsividad)
+   ========================================= */
+@media (max-width: 900px) {
+   .product-card {
+      width: calc(50% - 10px);
+      /* Pasa a 2 columnas en pantallas medianas */
+   }
+}
+
+@media (max-width: 600px) {
+   .product-card {
+      width: 100%;
+      /* Pasa a 1 columna en celulares */
+   }
+
+   .banner-content h1 {
+      font-size: 28px;
+   }
+}

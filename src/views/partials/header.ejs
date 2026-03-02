@@ -9,11 +9,19 @@
             <button type="button">Buscar</button>
         </div>
         <div class="user-actions">
-            <!-- vista de login para no mostrar el botón de "Ingresar" -->
-            <% if (typeof hideLoginBtn==='undefined' || !hideLoginBtn) { %>
+            <!-- Si el usuario NO está logueado -->
+            <% if (!locals.isLogged) { %>
                 <a href="/login" class="btn-login">Ingresar</a>
-                <% } %>
-                    <a href="/products/cart" class="btn-cart">🛍️ Carrito (0)</a>
+                <% } else { %>
+                    <!-- Si el usuario SÍ está logueado -->
+                    <a href="/profile" class="btn-login"
+                        style="background-color: transparent; color: var(--primary-color); display: flex; align-items: center; gap: 8px;">
+                        <img src="/images/users/<%= locals.userLogged.image %>" alt="Avatar"
+                            style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">
+                        Hola, <%= locals.userLogged.firstName %>
+                    </a>
+                    <% } %>
+                        <a href="/products/cart" class="btn-cart">🛍️ Carrito (0)</a>
         </div>
     </div>
 
@@ -23,8 +31,8 @@
             <li><a href="#">Servicio Técnico</a></li>
             <li><a href="#">Repuestos</a></li>
             <li><a href="#">Herramientas</a></li>
-            <!-- vista de registro -->
-            <% if (typeof hideRegisterBtn==='undefined' || !hideRegisterBtn) { %>
+            <!-- Solo mostramos "Crear Cuenta" a los visitantes -->
+            <% if (!locals.isLogged) { %>
                 <li><a href="/register">Crear Cuenta</a></li>
                 <% } %>
         </ul>

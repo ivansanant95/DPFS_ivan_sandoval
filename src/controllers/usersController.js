@@ -27,6 +27,12 @@ const usersController = {
                 // Levantar la sesión
                 req.session.userLogged = userToLogin;
 
+                // Setear Cookie si el usuario tildó "Recordarme"
+                if (req.body.remember) {
+                    // Cookie vive 60 minutos (ejemplo: 1000 * 60 * 60)
+                    res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60 * 60) });
+                }
+
                 return res.redirect('/');
             }
         }
@@ -90,6 +96,9 @@ const usersController = {
 
     // Destruye la sesión y desloguea al usuario
     logout: (req, res) => {
+        // Destruir Cookie de recordame
+        res.clearCookie('userEmail');
+        // Destruir Sesión de RAM
         req.session.destroy();
         return res.redirect('/');
     }

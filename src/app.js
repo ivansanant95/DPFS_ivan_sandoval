@@ -21,6 +21,10 @@ app.use(session({
 }));
 app.use(cookieParser());
 
+// Configuración de auto-login y variables locales para vistas
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
+app.use(userLoggedMiddleware);
+
 // Configuración de recursos estáticos (CSS, Imágenes)
 app.use(express.static(path.join(__dirname, '../public')));
 

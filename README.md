@@ -22,7 +22,7 @@ Nuestro mercado apunta a dos grandes segmentos (B2C y B2B):
 ## 📋 Tablero de Trabajo Ágil
 
 El seguimiento de las tareas y Sprints de este proyecto se realiza utilizando la metodología Kanban. Puedes ver el progreso en tiempo real del tablero:
-* **[Ir al Tablero de Trello de Reparatech](https://trello.com/b/NHXawamd/reparatech-e-commerce)** *(Nota: Reemplaza este enlace con tu URL real)*
+* **[Ir al Tablero de Trello de Reparatech](https://trello.com/b/NHXawamd/reparatech-e-commerce)** 
 
 ## 🔍 Sitios de Referencia (Inspiración)
 

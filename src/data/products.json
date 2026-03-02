@@ -15,10 +15,12 @@
     "id": 2,
     "name": "Kit de Herramientas Premium 54 piezas",
     "description": "El set definitivo para técnicos en reparación de celulares y computadoras. Incluye destornilladores magnéticos de precisión (Pentalobe, Torx, Phillips), pinzas antiestáticas, spudgers y ventosa de sujeción.",
-    "price": 45,
+    "price": 50,
     "category": "herramientas",
     "image": "https://via.placeholder.com/400x400?text=Kit+Herramientas",
-    "colors": []
+    "colors": [
+      "negro"
+    ]
   },
   {
     "id": 3,

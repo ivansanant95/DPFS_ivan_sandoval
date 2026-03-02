@@ -60,7 +60,43 @@ const productsController = {
 
     // Renderiza el formulario de Edición de Producto
     edit: (req, res) => {
-        res.render('products/productEdit');
+        const productsFilePath = path.join(__dirname, '../data/products.json');
+        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+        const productToEdit = products.find(p => p.id === parseInt(req.params.id, 10));
+
+        if (productToEdit) {
+            res.render('products/productEdit', { product: productToEdit });
+        } else {
+            res.status(404).send('Producto no encontrado para editar');
+        }
+    },
+
+    // Procesa los datos editados y sobrescribe el JSON
+    update: (req, res) => {
+        const productsFilePath = path.join(__dirname, '../data/products.json');
+        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+        const productId = parseInt(req.params.id, 10);
+
+        // Encontramos el índice del producto a modificar
+        const index = products.findIndex(p => p.id === productId);
+
+        if (index !== -1) {
+            // Actualizamos solo los campos recibidos, manteniendo ID e Imagen 
+            products[index] = {
+                ...products[index],
+                name: req.body.name,
+                description: req.body.description,
+                price: parseFloat(req.body.price),
+                category: req.body.category,
+                colors: req.body.colors ? (Array.isArray(req.body.colors) ? req.body.colors : [req.body.colors]) : []
+            };
+
+            // Guardamos el JSON
+            fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
+            res.redirect('/products/' + productId); // Redirigimos al detalle para ver los cambios
+        } else {
+            res.status(404).send('No se pudo actualizar el producto');
+        }
     }
 };
 

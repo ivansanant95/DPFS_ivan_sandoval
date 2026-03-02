@@ -8,6 +8,39 @@ const usersController = {
         res.render('users/login');
     },
 
+    // Procesa el inicio de sesión
+    processLogin: (req, res) => {
+        const usersFilePath = path.join(__dirname, '../data/users.json');
+        const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+
+        // Buscar al usuario por email
+        const userToLogin = users.find(user => user.email === req.body.email);
+
+        if (userToLogin) {
+            // Comparar la contraseña ingresada con el hash guardado
+            const isPasswordValid = bcrypt.compareSync(req.body.password, userToLogin.password);
+
+            if (isPasswordValid) {
+                // Borrar la contraseña por seguridad antes de subir el usuario a session
+                delete userToLogin.password;
+
+                // Levantar la sesión
+                req.session.userLogged = userToLogin;
+
+                return res.redirect('/');
+            }
+        }
+
+        // Si el usuario no se encuentra o la contraseña es inválida
+        return res.render('users/login', {
+            errors: {
+                login: {
+                    msg: 'Las credenciales proporcionadas son inválidas'
+                }
+            }
+        });
+    },
+
     // Renderiza la vista de Registro
     register: (req, res) => {
         res.render('users/register');

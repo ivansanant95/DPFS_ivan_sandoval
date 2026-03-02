@@ -18,6 +18,7 @@ const uploadFile = multer({ storage });
 
 // Rutas de Usuarios
 router.get('/login', usersController.login);
+router.post('/login', usersController.processLogin);
 
 router.get('/register', usersController.register);
 router.post('/register', uploadFile.single('avatar'), usersController.processRegister);

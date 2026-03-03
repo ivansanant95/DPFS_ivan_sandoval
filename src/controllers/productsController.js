@@ -55,14 +55,20 @@ const productsController = {
                 });
             }
 
+            // Determinamos la ruta de la imagen según Multer
+            let imageFile = "https://via.placeholder.com/400x400?text=Nuevo+Producto";
+            if (req.file && req.file.filename) {
+                imageFile = '/images/products/' + req.file.filename;
+            }
+
             // Creamos el producto directamente usando Sequelize
             await db.Product.create({
                 name: req.body.name,
                 description: req.body.description,
                 price: parseFloat(req.body.price),
                 category_id: req.body.category, // El name del form debe coincidir
-                stock: 0, // Por ahora harcodeamos un stock inicial
-                image: "https://via.placeholder.com/400x400?text=Nuevo+Producto"
+                stock: 0, // Stock inicial
+                image: imageFile
             });
 
             // Redirigir al usuario al listado de productos (Home)
@@ -110,16 +116,23 @@ const productsController = {
                 });
             }
 
+            // Preparamos el objeto con los datos a actualizar
+            const updateData = {
+                name: req.body.name,
+                description: req.body.description,
+                price: parseFloat(req.body.price),
+                category_id: req.body.category
+            };
+
+            if (req.body.stock !== undefined) {
+                updateData.stock = parseInt(req.body.stock, 10);
+            }
+            if (req.file && req.file.filename) {
+                updateData.image = '/images/products/' + req.file.filename;
+            }
+
             // Actualizamos en la base de datos indicando el WHERE
-            await db.Product.update(
-                {
-                    name: req.body.name,
-                    description: req.body.description,
-                    price: parseFloat(req.body.price),
-                    category_id: req.body.category
-                },
-                { where: { id: productId } }
-            );
+            await db.Product.update(updateData, { where: { id: productId } });
 
             res.redirect('/products/' + productId); // Redirigimos al detalle para ver los cambios
         } catch (error) {

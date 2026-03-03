@@ -11,42 +11,86 @@
             <!-- CONTENIDO PRINCIPAL (MAIN) -->
             <main>
                 <!-- Banner Principal -->
-                <section class="home-banner">
-                    <div class="banner-content">
-                        <h1>Tu celular merece una segunda oportunidad</h1>
-                        <p>Encuentra los mejores repuestos, herramientas y servicio técnico especializado.</p>
-                        <a href="#" class="btn-primary">Explorar Servicios</a>
-                    </div>
-                </section>
+                <% if (!locals.userLogged || locals.userLogged.role_id !==1) { %>
+                    <section class="home-banner">
+                        <div class="banner-content">
+                            <h1>Tu celular merece una segunda oportunidad</h1>
+                            <p>Encuentra los mejores repuestos, herramientas y servicio técnico especializado.</p>
+                            <a href="#" class="btn-primary">Explorar Servicios</a>
+                        </div>
+                    </section>
+                    <% } %>
 
-                <!-- Sección de Productos Destacados -->
-                <section class="featured-products">
-                    <h2 class="section-title">Productos Destacados</h2>
+                        <!-- Sección de Productos Destacados -->
+                        <section class="featured-products">
+                            <div class="section-header"
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                                <h2 class="section-title">Productos Destacados</h2>
+                                <% if (locals.userLogged && locals.userLogged.role_id===1) { %>
+                                    <a href="/products/create" class="btn-primary">+ Crear Producto</a>
+                                    <% } %>
+                            </div>
 
-                    <div class="product-grid">
-                        <% if (products && products.length> 0) { %>
-                            <% products.forEach(product=> { %>
-                                <article class="product-card">
-                                    <div class="product-image">
-                                        <img src="<%= product.image %>" alt="<%= product.name %>">
-                                    </div>
-                                    <div class="product-info">
-                                        <h3>
-                                            <%= product.name %>
-                                        </h3>
-                                        <!-- Formateamos el precio para que siempre tenga 2 decimales -->
-                                        <p class="price">$<%= Number(product.price).toFixed(2) %>
-                                        </p>
-                                        <a href="/products/<%= product.id %>" class="btn-secondary">Ver Detalles</a>
-                                    </div>
-                                </article>
-                                <% }) %>
-                                    <% } else { %>
-                                        <p style="text-align: center; width: 100%; color: var(--text-light);">No hay
-                                            productos disponibles por el momento.</p>
-                                        <% } %>
-                    </div>
-                </section>
+                            <div class="product-grid">
+                                <% if (products && products.length> 0) { %>
+                                    <% products.forEach(product=> { %>
+                                        <article class="product-card">
+                                            <div class="product-image">
+                                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                                            </div>
+                                            <div class="product-info">
+                                                <h3>
+                                                    <%= product.name %>
+                                                </h3>
+
+                                                <div class="price-box">
+                                                    <% if (locals.userLogged && product.discount> 0) { %>
+                                                        <span class="price-original">$<%=
+                                                                Number(product.price).toFixed(2) %></span>
+                                                        <span class="price-discounted">
+                                                            $<%= Number(product.price - (product.price *
+                                                                product.discount / 100)).toFixed(2) %>
+                                                                <small>(Socio)</small>
+                                                        </span>
+                                                        <% } else { %>
+                                                            <span class="price">$<%= Number(product.price).toFixed(2) %>
+                                                                    </span>
+                                                            <% } %>
+                                                </div>
+
+                                                <% if (!locals.userLogged || locals.userLogged.role_id !==1) { %>
+                                                    <div style="display: flex; gap: 10px; margin-top: auto;">
+                                                        <a href="/products/<%= product.id %>" class="btn-secondary"
+                                                            style="flex: 1;">Detalles</a>
+                                                        <form action="/cart/add/<%= product.id %>" method="POST"
+                                                            style="margin: 0;">
+                                                            <input type="hidden" name="quantity" value="1">
+                                                            <button type="submit" class="btn-primary"
+                                                                style="padding: 12px 15px; border-radius: 12px;">🛒</button>
+                                                        </form>
+                                                    </div>
+                                                    <% } else { %>
+                                                        <div style="display: flex; gap: 10px; margin-top: auto;">
+                                                            <a href="/products/<%= product.id %>/edit"
+                                                                class="btn-secondary" style="flex: 1;">✏️ Editar</a>
+                                                            <form action="/products/<%= product.id %>?_method=DELETE"
+                                                                method="POST" style="margin: 0;">
+                                                                <button type="submit" class="btn-secondary"
+                                                                    style="background: rgba(231, 76, 60, 0.1); color: #e74c3c; border-color: rgba(231, 76, 60, 0.2);"
+                                                                    onclick="return confirm('¿Eliminar producto?')">🗑️</button>
+                                                            </form>
+                                                        </div>
+                                                        <% } %>
+                                            </div>
+                                        </article>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <p
+                                                    style="grid-column: 1/-1; text-align: center; color: var(--text-dim);">
+                                                    No hay productos disponibles por el momento.</p>
+                                                <% } %>
+                            </div>
+                        </section>
             </main>
 
             <!-- Footer -->

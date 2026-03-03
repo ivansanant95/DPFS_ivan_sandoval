@@ -75,38 +75,32 @@ const usersController = {
     // Procesa la creación de un nuevo usuario
     processRegister: async (req, res) => {
         try {
-            // Atrapamos cualquier error generado por Express Validator (Ej: pass muy corto, sin email...)
+            // Atrapamos cualquier error generado por Express Validator
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.render('users/register', {
-                    errors: errors.mapped(),  // Mapeamos a objeto literal { email: { msg: '...' } }
-                    oldData: req.body         // Mantenemos lo que el usuario había tipeado
+                    errors: errors.mapped(),
+                    oldData: req.body
                 });
             }
 
-            // (El middleware de Validacion de email duplicado lo dejamos delegado a express-validator, ya no crashea acá)
-
-            // Verificar si el middleware Multer subió un archivo, sino enviamos foto por defecto
             let imageFile = 'default-avatar.png';
             if (req.file && req.file.filename) {
                 imageFile = req.file.filename;
             }
 
-            // Encriptar la contraseña (Hash salteado 10 veces)
             const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
-            // Crear el objeto de usuario directamente en SQL
             await db.User.create({
                 first_name: req.body.firstName,
                 last_name: req.body.lastName,
                 email: req.body.email,
                 password: hashedPassword,
-                role_id: 2, // 2 equivale a "customer" en data.sql
+                role_id: 2, // Default to customer
                 image: imageFile,
                 phone: req.body.phone || ''
             });
 
-            // Redirigir al login para que inicie sesión con su nueva cuenta en MySQL
             res.redirect('/login');
         } catch (error) {
             console.error("Error intentando registrar al usuario en la BD:", error);
@@ -120,6 +114,83 @@ const usersController = {
         return res.render('users/profile', {
             user: req.session.userLogged
         });
+    },
+
+    profileEdit: (req, res) => {
+        return res.render('users/profileEdit', {
+            user: req.session.userLogged
+        });
+    },
+
+    profileUpdate: async (req, res) => {
+        try {
+            const userId = req.session.userLogged.id;
+            const userInDb = await db.User.findByPk(userId);
+
+            if (!userInDb) return res.redirect('/login');
+
+            let imageFile = userInDb.image;
+            if (req.file && req.file.filename) {
+                // Borrar imagen anterior si no es la default
+                if (imageFile && imageFile !== 'default-avatar.png') {
+                    const oldPath = path.join(__dirname, '../../public/images/users/', imageFile);
+                    if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+                }
+                imageFile = req.file.filename;
+            }
+
+            await db.User.update({
+                first_name: req.body.firstName,
+                last_name: req.body.lastName,
+                phone: req.body.phone,
+                image: imageFile
+            }, {
+                where: { id: userId }
+            });
+
+            // Actualizar Sesión
+            req.session.userLogged = {
+                ...req.session.userLogged,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                phone: req.body.phone,
+                image: imageFile
+            };
+
+            res.redirect('/profile');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error updating profile');
+        }
+    },
+
+    // Sprint 11: Administración de Usuarios
+    userList: async (req, res) => {
+        try {
+            const users = await db.User.findAll({
+                include: [{ association: 'role' }]
+            });
+            res.render('users/userList', { users });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error loading users');
+        }
+    },
+
+    userDelete: async (req, res) => {
+        try {
+            const userId = req.params.id;
+            // No permitir que el admin se borre a sí mismo por accidente
+            if (userId == req.session.userLogged.id) {
+                return res.redirect('/admin/users');
+            }
+
+            await db.User.destroy({ where: { id: userId } });
+            res.redirect('/admin/users');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error deleting user');
+        }
     },
 
     // Destruye la sesión y desloguea al usuario

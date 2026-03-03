@@ -36,11 +36,13 @@ app.set('views', path.join(__dirname, 'views'));
 const mainRoutes = require('./routes/mainRoutes');
 const usersRoutes = require('./routes/usersRoutes');
 const productsRoutes = require('./routes/productsRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 // Uso de Rutas
 app.use('/', mainRoutes);
 app.use('/', usersRoutes);
 app.use('/', productsRoutes);
+app.use('/', cartRoutes);
 
 // Levantar el servidor
 app.listen(PORT, () => {

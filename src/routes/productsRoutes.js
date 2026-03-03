@@ -18,13 +18,14 @@ const storage = multer.diskStorage({
 });
 const uploadFile = multer({ storage });
 
+const adminMiddleware = require('../middlewares/adminMiddleware');
+
 // Rutas de Productos
-router.get('/products/cart', productsController.cart);
-router.get('/products/create', productsController.create);
-router.post('/products', uploadFile.single('image'), productValidation, productsController.store);
-router.get('/products/:id/edit', productsController.edit);
-router.put('/products/:id', uploadFile.single('image'), productValidation, productsController.update);
-router.delete('/products/:id', productsController.destroy);
+router.get('/products/create', adminMiddleware, productsController.create);
+router.post('/products', adminMiddleware, uploadFile.single('image'), productValidation, productsController.store);
+router.get('/products/:id/edit', adminMiddleware, productsController.edit);
+router.put('/products/:id', adminMiddleware, uploadFile.single('image'), productValidation, productsController.update);
+router.delete('/products/:id', adminMiddleware, productsController.destroy);
 router.get('/products/:id', productsController.detail);
 
 module.exports = router;

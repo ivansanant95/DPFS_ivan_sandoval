@@ -2,7 +2,7 @@
    VARIABLES GLOBALES (Paleta y Tipografía)
    ========================================= */
 :root {
-  /* Paleta de Colores (Azul Tech y Naranja/Amarillo) */
+  /* Paleta de Colores Azul Tech y Naranja/Amarillo */
   --primary-color: #0056b3;
   --primary-hover: #003d82;
   --secondary-color: #ff9900;
@@ -13,7 +13,7 @@
   --white: #ffffff;
   --border-color: #e0e0e0;
 
-  /* Tipografía */
+  /* Tipografía Original */
   --font-main: 'Roboto', sans-serif;
 }
 
@@ -24,7 +24,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Fundamental para evitar desbordes con padding/border */
 }
 
 body {
@@ -35,18 +34,15 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* Para que el footer siempre quede abajo */
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  /* Hereda el color del padre para no verse azul por defecto */
 }
 
 ul {
   list-style: none;
-  /* Quitamos las viñetas */
 }
 
 /* =========================================
@@ -56,13 +52,10 @@ ul {
   background-color: var(--white);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
-  /* Fija el header al hacer scroll */
   top: 0;
   z-index: 100;
-  /* Asegura que se vea por sobre el resto */
 }
 
-/* Contenedor principal del encabezado (Logo, Buscador, Acciones) */
 .header-top {
   display: flex;
   justify-content: space-between;
@@ -70,9 +63,9 @@ ul {
   padding: 15px 5%;
   max-width: 1200px;
   margin: 0 auto;
+  gap: 15px;
 }
 
-/* Logotipo */
 .logo {
   font-size: 24px;
   font-weight: 700;
@@ -83,7 +76,6 @@ ul {
   color: var(--secondary-color);
 }
 
-/* Barra de Búsqueda */
 .search-bar {
   display: flex;
   flex-grow: 1;
@@ -114,10 +106,10 @@ ul {
   background-color: var(--secondary-hover);
 }
 
-/* Acciones de usuario */
 .user-actions {
   display: flex;
   gap: 15px;
+  align-items: center;
 }
 
 .user-actions a {
@@ -149,7 +141,29 @@ ul {
   background-color: var(--primary-hover);
 }
 
-/* Navegación Inferior (Categorías) */
+/* FIX RESPONSIVO PARA EL HEADER */
+@media (max-width: 768px) {
+  .header-top {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .user-actions {
+    order: 2;
+  }
+
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: none;
+    margin: 10px 0 0 0;
+  }
+}
+
 .main-nav {
   background-color: var(--primary-color);
 }
@@ -159,6 +173,8 @@ ul {
   justify-content: center;
   gap: 30px;
   padding: 10px 5%;
+  flex-wrap: wrap;
+  /* Para que no se rompa en pantallas chicas */
 }
 
 .nav-links a {
@@ -177,7 +193,6 @@ ul {
    ========================================= */
 main {
   flex-grow: 1;
-  /* Ocupa todo el espacio restante empujando el footer abajo */
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -197,7 +212,6 @@ main {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* Para hacerlo responsive después */
   max-width: 1200px;
   margin: 0 auto;
   gap: 20px;

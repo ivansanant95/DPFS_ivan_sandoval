@@ -30,9 +30,16 @@ router.post('/login', loginValidation, usersController.processLogin);
 router.get('/register', guestMiddleware, usersController.register);
 router.post('/register', uploadFile.single('avatar'), registerValidation, usersController.processRegister);
 
-// Rutas Restringidas
+// Rutas Restringidas (Mixtas)
 // (Solo usuarios logueados pueden ver su Perfil y desloguearse)
 router.get('/profile', authMiddleware, usersController.profile);
+router.get('/profile/edit', authMiddleware, usersController.profileEdit);
+router.put('/profile/edit', authMiddleware, uploadFile.single('avatar'), usersController.profileUpdate);
 router.post('/logout', usersController.logout);
+
+// Rutas de Administración de Usuarios
+const adminMiddleware = require('../middlewares/adminMiddleware');
+router.get('/admin/users', authMiddleware, adminMiddleware, usersController.userList);
+router.delete('/admin/users/:id', authMiddleware, adminMiddleware, usersController.userDelete);
 
 module.exports = router;

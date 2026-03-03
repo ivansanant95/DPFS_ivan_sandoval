@@ -32,15 +32,22 @@
                             <%= user.phone || 'No registrado' %>
                         </p>
 
-                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                            <a href="/" class="btn-submit"
-                                style="text-decoration: none; padding: 12px 25px; flex: 1; min-width: 150px; background-color: var(--secondary-color); text-align: center;">Vitar
-                                Tienda</a>
+                        <div
+                            style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; flex-direction: column;">
+                            <div style="display: flex; gap: 10px; width: 100%;">
+                                <a href="/" class="btn-submit"
+                                    style="text-decoration: none; padding: 12px 25px; flex: 1; background-color: var(--secondary-color); text-align: center;">Vitar
+                                    Tienda</a>
+
+                                <a href="/profile/edit" class="btn-submit"
+                                    style="text-decoration: none; padding: 12px 25px; flex: 1; background-color: #3498db; text-align: center;">Editar
+                                    Perfil</a>
+                            </div>
 
                             <!-- Formulario para destruir la sesión -->
-                            <form action="/logout" method="POST" style="margin: 0; flex: 1; min-width: 150px;">
+                            <form action="/logout" method="POST" style="margin: 0; width: 100%;">
                                 <button type="submit" class="btn-submit"
-                                    style="background-color: #e74c3c; width: 100%; padding: 12px 25px; margin-top: 0;">Cerrar
+                                    style="background-color: #e74c3c; width: 100%; padding: 12px 25px; margin-top: 5px;">Cerrar
                                     Sesión</button>
                             </form>
                         </div>

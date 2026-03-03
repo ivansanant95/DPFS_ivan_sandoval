@@ -47,34 +47,28 @@
    text-align: center;
 }
 
-/* Grilla responsive usando Flexbox */
+/* Grilla Modernizada con Grid para evitar que se rompa */
 .product-grid {
-   display: flex;
-   flex-wrap: wrap;
-   /* Permite que los productos pasen a la siguiente línea si no caben */
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
    gap: 20px;
-   /* Espacio entre las tarjetas */
-   justify-content: space-between;
+   width: 100%;
 }
 
-/* Tarjeta de Producto Individual (Modelo de Caja) */
+/* Tarjeta de Producto */
 .product-card {
    background-color: var(--white);
    border: 1px solid var(--border-color);
    border-radius: 8px;
-   width: calc(25% - 15px);
-   /* 4 columnas (restamos márgenes) */
-   min-width: 200px;
    overflow: hidden;
-   /* Para que la imagen no se salga en las esquinas curvas */
    transition: transform 0.3s ease, box-shadow 0.3s ease;
    display: flex;
    flex-direction: column;
+   height: 100%;
 }
 
 .product-card:hover {
    transform: translateY(-5px);
-   /* Efecto de levitar */
    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -89,10 +83,9 @@
 }
 
 .product-image img {
-   max-width: 100%;
-   max-height: 100%;
+   max-width: 90%;
+   max-height: 90%;
    object-fit: contain;
-   /* Ajusta la imagen sin deformarla */
 }
 
 .product-info {
@@ -100,14 +93,12 @@
    display: flex;
    flex-direction: column;
    flex-grow: 1;
-   /* Empuja el botón hacia abajo cuando los títulos tienen diferentes alturas */
 }
 
 .product-info h3 {
    font-size: 16px;
    margin-bottom: 10px;
    color: var(--text-main);
-   flex-grow: 1;
 }
 
 .price {
@@ -127,6 +118,7 @@
    border-radius: 4px;
    font-weight: bold;
    transition: all 0.3s ease;
+   margin-top: auto;
 }
 
 .product-card:hover .btn-secondary {
@@ -134,23 +126,38 @@
    color: var(--white);
 }
 
-/* =========================================
-   MEDIA QUERIES (Responsividad)
-   ========================================= */
-@media (max-width: 900px) {
-   .product-card {
-      width: calc(50% - 10px);
-      /* Pasa a 2 columnas en pantallas medianas */
+/* --- Lógica de Precios Socio --- */
+.price-original {
+   text-decoration: line-through;
+   color: #999;
+   font-size: 0.9em;
+   margin-bottom: 0;
+}
+
+.price-discounted {
+   color: #27ae60;
+   font-weight: bold;
+   font-size: 1.2em;
+   margin-top: 5px;
+}
+
+/* Responsividad Adicional */
+@media (max-width: 600px) {
+   .home-banner {
+      padding: 40px 15px;
+      border-radius: 0;
+      margin-left: -5%;
+      margin-right: -5%;
+   }
+
+   .product-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
    }
 }
 
-@media (max-width: 600px) {
-   .product-card {
-      width: 100%;
-      /* Pasa a 1 columna en celulares */
-   }
-
-   .banner-content h1 {
-      font-size: 28px;
+@media (max-width: 450px) {
+   .product-grid {
+      grid-template-columns: 1fr;
    }
 }

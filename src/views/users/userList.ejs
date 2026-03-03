@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', { title: 'Reparatech - Gestión de Usuarios' , cssFile: 'cart.css' }) %>
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .user-table th,
+        .user-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-table th {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .role-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .role-admin {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .role-customer {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .btn-delete-user {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-delete-user:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <body>
+        <%- include('../partials/header') %>
+            <main>
+                <section class="admin-container">
+                    <h1 style="color: var(--primary-color);">Gestión de Usuarios</h1>
+                    <p>Lista total de personas registradas en Reparatech.</p>
+
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(user=> { %>
+                                <tr>
+                                    <td>#<%= user.id %>
+                                    </td>
+                                    <td>
+                                        <%= user.first_name %>
+                                            <%= user.last_name %>
+                                    </td>
+                                    <td>
+                                        <%= user.email %>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="role-badge <%= user.role_id === 1 ? 'role-admin' : 'role-customer' %>">
+                                            <%= user.role.name %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <form action="/admin/users/<%= user.id %>?_method=DELETE" method="POST"
+                                            style="display:inline;">
+                                            <button type="submit" class="btn-delete-user" <%=locals.userLogged &&
+                                                locals.userLogged.id===user.id ? 'disabled' : '' %>
+                                                onclick="return confirm('¿Estás seguro de eliminar a este usuario?')">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+            <%- include('../partials/footer') %>
+    </body>
+
+</html>

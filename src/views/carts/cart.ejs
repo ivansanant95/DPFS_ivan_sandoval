@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', { title: 'Reparatech - Mi Carrito' , cssFile: 'cart.css' }) %>
+
+    <body>
+        <%- include('../partials/header') %>
+
+            <main>
+                <section class="cart-container">
+                    <% if (cartProducts && cartProducts.length> 0) { %>
+                        <div class="cart-left">
+                            <h2>Tu Carrito de Compras</h2>
+                            <!-- Lista de productos -->
+                            <div class="cart-items">
+                                <% cartProducts.forEach(item=> { %>
+                                    <div class="cart-item">
+                                        <div class="item-img">
+                                            <img src="<%= item.product.image %>" alt="<%= item.product.name %>">
+                                        </div>
+                                        <div class="item-details">
+                                            <h3 class="item-title">
+                                                <%= item.product.name %>
+                                            </h3>
+                                            <p class="item-price">$<%= Number(item.unit_price).toFixed(2) %> c/u</p>
+                                        </div>
+                                        <div class="item-actions">
+                                            <!-- Modificar Cantidad -->
+                                            <div class="quantity-controls">
+                                                <form action="/cart/edit/<%= item.id %>?_method=PUT" method="POST"
+                                                    style="display:inline;">
+                                                    <input type="hidden" name="action" value="decrease">
+                                                    <button type="submit" class="qty-btn" <%=item.quantity <=1
+                                                        ? 'disabled' : '' %>>-</button>
+                                                </form>
+                                                <span class="qty-number">
+                                                    <%= item.quantity %>
+                                                </span>
+                                                <form action="/cart/edit/<%= item.id %>?_method=PUT" method="POST"
+                                                    style="display:inline;">
+                                                    <input type="hidden" name="action" value="increase">
+                                                    <button type="submit" class="qty-btn">+</button>
+                                                </form>
+                                            </div>
+                                            <!-- Eliminar del Carrito -->
+                                            <form action="/cart/remove/<%= item.id %>?_method=DELETE" method="POST"
+                                                style="display:inline; margin-left: 15px;">
+                                                <button type="submit" class="btn-remove">🗑️ Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                        </div>
+
+                        <!-- Resumen de Compra (Derecha) -->
+                        <div class="cart-right">
+                            <div class="cart-summary">
+                                <h2>Resumen de la Compra</h2>
+                                <div class="summary-row">
+                                    <span>Subtotal:</span>
+                                    <span>$<%= Number(total).toFixed(2) %></span>
+                                </div>
+                                <div class="summary-total">
+                                    <span>Total a Pagar:</span>
+                                    <span>$<%= Number(total).toFixed(2) %></span>
+                                </div>
+                                <% if (!locals.userLogged) { %>
+                                    <div
+                                        style="margin-top: 15px; font-size: 0.85em; color: #e67e22; text-align: center; margin-bottom: 10px;">
+                                        💡 Compra como invitado o <a href="/login"
+                                            style="color: #d35400; font-weight: bold;">Inicia Sesión</a> para obtener
+                                        beneficios.
+                                    </div>
+                                    <% } %>
+
+                                        <a href="/checkout" class="btn-checkout"
+                                            style="display: block; text-align: center; text-decoration: none; margin-top: 15px;">Finalizar
+                                            Compra</a>
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="empty-cart-message" style="text-align: center; padding: 50px;">
+                                <h2>Tu carrito está vacío 😔</h2>
+                                <p>¿Qué esperas para llevarte lo mejor en tecnología?</p>
+                                <a href="/" class="btn-primary" style="margin-top: 20px; display: inline-block;">Volver
+                                    a la tienda</a>
+                            </div>
+                            <% } %>
+                </section>
+            </main>
+
+            <%- include('../partials/footer') %>
+    </body>
+
+</html>

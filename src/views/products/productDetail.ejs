@@ -8,9 +8,15 @@
 
             <!-- CONTENIDO PRINCIPAL -->
             <main>
-                <!-- Migas de pan -->
+                <!-- Migas de pan: Inicio > Categoría > > Producto -->
                 <div class="breadcrumb">
-                    <a href="/">Inicio</a> > <a href="#">Repuestos</a> > <%= product.category %> > <%= product.name %>
+                    <a href="/">Inicio</a>
+                    <% if (product.category) { %>
+                        > <a href="/products/category/<%= product.category.id %>">
+                            <%= product.category.name %>
+                        </a>
+                        <% } %>
+                            > > <%= product.name %>
                 </div>
 
                 <section class="product-detail-container">

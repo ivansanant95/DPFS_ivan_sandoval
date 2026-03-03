@@ -9,8 +9,10 @@ const productsController = {
     // Renderiza la vista de Detalles de un producto
     detail: async (req, res) => {
         try {
-            // Buscar el producto por Clave Primaria (Primary Key) en MySQL
-            const product = await db.Product.findByPk(req.params.id);
+            // Buscar el producto r e incluir su Categoría (con alias 'category')
+            const product = await db.Product.findByPk(req.params.id, {
+                include: [{ model: db.Category, as: 'category' }]
+            });
 
             if (product) {
                 res.render('products/productDetail', { product: product });

@@ -40,6 +40,7 @@
     <nav class="main-nav">
         <ul class="nav-links">
             <% if (!locals.userLogged || locals.userLogged.role_id !==1) { %>
+                <!-- Enlaces del catálogo visible solo para NO-ADMS -->
                 <li><a href="/products/category/1"><i class="fa-solid fa-mobile-retro"></i> Celulares</a></li>
                 <li><a href="/services"><i class="fa-solid fa-screwdriver-wrench"></i> Servicio Técnico</a></li>
                 <li><a href="/products/category/2"><i class="fa-solid fa-microchip"></i> Repuestos</a></li>
@@ -50,11 +51,14 @@
                     <% if (!locals.isLogged) { %>
                         <li><a href="/register"><i class="fa-solid fa-user-plus"></i> Crear Cuenta</a></li>
                         <% } %>
-                            <!-- Panel de Admin -->
+
+                            <!-- Panel de Admin (Destacado) -->
                             <% if (locals.userLogged && locals.userLogged.role_id===1) { %>
                                 <li><a href="/products/create"
                                         style="color: var(--secondary-color); font-weight: bold;"><i
-                                            class="fa-solid fa-plus"></i> Nuevo Producto</a></li>
+                                            class="fa-solid fa-plus-circle"></i> Nuevo Producto</a></li>
+                                <li><a href="/services" style="color: #10b981; font-weight: bold;"><i
+                                            class="fa-solid fa-screwdriver-wrench"></i> Gestionar Servicios</a></li>
                                 <li><a href="/admin/users" style="color: var(--surface-hover); font-weight: bold;"><i
                                             class="fa-solid fa-users"></i> Usuarios</a></li>
                                 <% } %>

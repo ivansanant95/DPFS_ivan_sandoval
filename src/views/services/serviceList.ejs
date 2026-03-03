@@ -26,6 +26,16 @@
                             Confiabilidad, rapidez y garantía escrita. Selecciona el servicio que necesitas para
                             visualizar las características o reservar tu turno con nuestros técnicos expertos.
                         </p>
+
+                        <!-- Botón Crear (Solo Admin) -->
+                        <% if (locals.userLogged && userLogged.role_id===1) { %>
+                            <div style="margin-top: 30px;">
+                                <a href="/services/create" class="btn-primary"
+                                    style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-weight: 700; background-color: #10b981; border: none;">
+                                    <i class="fa-solid fa-plus"></i> Nuevo Servicio
+                                </a>
+                            </div>
+                            <% } %>
                     </div>
 
                     <!-- Grilla de Servicios -->
@@ -95,6 +105,28 @@
                                             style="margin-top: 20px; width: 100%; text-align: center; border-radius: 8px; font-weight: 600; letter-spacing: 0.5px; display: flex; justify-content: center; align-items: center; gap: 8px;">
                                             <i class="fa-regular fa-calendar-check"></i> Agendar Turno
                                         </a>
+
+                                        <!-- Acciones Admin (Solo Admin) -->
+                                        <% if (locals.userLogged && userLogged.role_id===1) { %>
+                                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                                <a href="/services/<%= service.id %>/edit"
+                                                    style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; background: rgba(37, 99, 235, 0.1); color: var(--primary-color); text-decoration: none; font-size: 13px; font-weight: 700; border: 1px solid rgba(37, 99, 235, 0.2); transition: all 0.2s;"
+                                                    onmouseover="this.style.background='var(--primary-color)'; this.style.color='white'"
+                                                    onmouseout="this.style.background='rgba(37, 99, 235, 0.1)'; this.style.color='var(--primary-color)'">
+                                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                </a>
+                                                <form action="/services/<%= service.id %>?_method=DELETE" method="POST"
+                                                    style="flex: 1;"
+                                                    onsubmit="return confirm('¿Estás seguro de que deseas eliminar este servicio?')">
+                                                    <button type="submit"
+                                                        style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s;"
+                                                        onmouseover="this.style.background='#ef4444'; this.style.color='white'"
+                                                        onmouseout="this.style.background='rgba(239, 68, 68, 0.1)'; this.style.color='#ef4444'">
+                                                        <i class="fa-solid fa-trash-can"></i> Borrar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <% } %>
                                     </div>
                                 </article>
                                 <% }) %>

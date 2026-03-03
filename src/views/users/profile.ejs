@@ -34,22 +34,55 @@
 
                         <div
                             style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; flex-direction: column;">
-                            <div style="display: flex; gap: 10px; width: 100%;">
-                                <a href="/" class="btn-submit"
-                                    style="text-decoration: none; padding: 12px 25px; flex: 1; background-color: var(--secondary-color); text-align: center;">Vitar
-                                    Tienda</a>
 
-                                <a href="/profile/edit" class="btn-submit"
-                                    style="text-decoration: none; padding: 12px 25px; flex: 1; background-color: #3498db; text-align: center;">Editar
-                                    Perfil</a>
-                            </div>
+                            <!-- Panel de Administración (Solo Admin) -->
+                            <% if (locals.userLogged && locals.userLogged.role_id===1) { %>
+                                <div
+                                    style="background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left;">
+                                    <h3
+                                        style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-color); font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                        <i class="fa-solid fa-shield-halved"></i> Panel de Administración
+                                    </h3>
+                                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                                        <a href="/products/create"
+                                            style="display: flex; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px; border-radius: 8px; transition: background 0.2s;"
+                                            onmouseover="this.style.background='white'">
+                                            <i class="fa-solid fa-plus-circle"
+                                                style="color: var(--secondary-color); width: 20px;"></i> Cargar Nuevo
+                                            Producto
+                                        </a>
+                                        <a href="/services"
+                                            style="display: flex; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px; border-radius: 8px; transition: background 0.2s;"
+                                            onmouseover="this.style.background='white'">
+                                            <i class="fa-solid fa-screwdriver-wrench"
+                                                style="color: #10b981; width: 20px;"></i> Gestionar Servicios Técnicos
+                                        </a>
+                                        <a href="/admin/users"
+                                            style="display: flex; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px; border-radius: 8px; transition: background 0.2s;"
+                                            onmouseover="this.style.background='white'">
+                                            <i class="fa-solid fa-users" style="color: #3498db; width: 20px;"></i>
+                                            Administración de Usuarios
+                                        </a>
+                                    </div>
+                                </div>
+                                <% } %>
 
-                            <!-- Formulario para destruir la sesión -->
-                            <form action="/logout" method="POST" style="margin: 0; width: 100%;">
-                                <button type="submit" class="btn-submit"
-                                    style="background-color: #e74c3c; width: 100%; padding: 12px 25px; margin-top: 5px;">Cerrar
-                                    Sesión</button>
-                            </form>
+                                    <div style="display: flex; gap: 10px; width: 100%;">
+                                        <a href="/" class="btn-submit"
+                                            style="text-decoration: none; padding: 12px 25px; flex: 1; background-color: var(--secondary-color); text-align: center;">Visitar
+                                            Tienda</a>
+
+                                        <a href="/profile/edit" class="btn-submit"
+                                            style="text-decoration: none; padding: 12px 25px; flex: 1; background-color: #3498db; text-align: center;">Editar
+                                            Perfil</a>
+                                    </div>
+
+                                    <!-- Formulario para destruir la sesión -->
+                                    <form action="/logout" method="POST" style="margin: 0; width: 100%;">
+                                        <button type="submit" class="btn-submit"
+                                            style="background-color: #e74c3c; width: 100%; padding: 12px 25px; margin-top: 5px;">Cerrar
+                                            Sesión</button>
+                                    </form>
                         </div>
                 </section>
             </main>

@@ -44,6 +44,7 @@ const servicesRoutes = require('./routes/servicesRoutes');
 // Importación de Enrutadores Backend APIs
 const apiUsersRoutes = require('./routes/api/usersAPIRoutes');
 const apiProductsRoutes = require('./routes/api/productsAPIRoutes');
+const apiServicesRoutes = require('./routes/api/servicesAPIRoutes');
 
 // Uso de Rutas Frontend
 app.use('/', mainRoutes);
@@ -55,6 +56,7 @@ app.use('/', servicesRoutes);
 // Uso de Rutas Backend APIs
 app.use('/api/users', apiUsersRoutes);
 app.use('/api/products', apiProductsRoutes);
+app.use('/api/services', apiServicesRoutes);
 
 // Levantar el servidor
 app.listen(PORT, () => {

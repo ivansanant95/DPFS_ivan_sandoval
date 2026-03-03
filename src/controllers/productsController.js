@@ -3,6 +3,7 @@ const fs = require('fs');
 
 // Requerimos los modelos de Sequelize
 const db = require('../database/models');
+const { validationResult } = require('express-validator');
 
 const productsController = {
     // Renderiza la vista de Detalles de un producto
@@ -42,6 +43,18 @@ const productsController = {
     // Procesa el formulario y guarda el nuevo producto en MySQL
     store: async (req, res) => {
         try {
+            // Evaluamos si pasamos el escudo de validacion de express-validator
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                // Volvemos a consultar categorías para que el <select> no se rompa
+                const categories = await db.Category.findAll();
+                return res.render('products/productCreate', {
+                    categories,
+                    errors: errors.mapped(),
+                    oldData: req.body
+                });
+            }
+
             // Creamos el producto directamente usando Sequelize
             await db.Product.create({
                 name: req.body.name,
@@ -82,6 +95,20 @@ const productsController = {
     update: async (req, res) => {
         try {
             const productId = req.params.id;
+
+            // Evaluamos si pasamos el escudo en Updates
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                // Hay que mandarle los datos simulando que es un product para repoblar
+                const productToEdit = await db.Product.findByPk(productId);
+                const categories = await db.Category.findAll();
+                return res.render('products/productEdit', {
+                    product: productToEdit,
+                    categories,
+                    errors: errors.mapped(),
+                    oldData: req.body
+                });
+            }
 
             // Actualizamos en la base de datos indicando el WHERE
             await db.Product.update(

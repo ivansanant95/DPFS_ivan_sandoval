@@ -16,9 +16,13 @@
                     <!-- Si el usuario SÍ está logueado -->
                     <a href="/profile" class="btn-login"
                         style="background-color: transparent; color: var(--primary-color); display: flex; align-items: center; gap: 8px;">
-                        <img src="/images/users/<%= locals.userLogged.image %>" alt="Avatar"
-                            style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">
-                        Hola, <%= locals.userLogged.firstName %>
+                        <% let avatarUrl=(locals.userLogged.image && locals.userLogged.image !=='default-avatar.png' )
+                            ? '/images/users/' + locals.userLogged.image :
+                            `https://ui-avatars.com/api/?name=${locals.userLogged.firstName}+${locals.userLogged.lastName}&background=27ae60&color=fff&rounded=true`;
+                            %>
+                            <img src="<%= avatarUrl %>" alt="Avatar"
+                                style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">
+                            Hola, <%= locals.userLogged.firstName %>
                     </a>
                     <% } %>
                         <a href="/products/cart" class="btn-cart">🛍️ Carrito (0)</a>

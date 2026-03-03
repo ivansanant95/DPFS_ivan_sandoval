@@ -35,10 +35,11 @@
                                 <select id="category" name="category" class="form-control" required
                                     style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
                                     <option value="" disabled selected>Seleccione...</option>
-                                    <option value="celulares">Celulares</option>
-                                    <option value="herramientas">Herramientas</option>
-                                    <option value="repuestos">Repuestos</option>
-                                    <option value="accesorios">Accesorios</option>
+                                    <% categories.forEach(cat=> { %>
+                                        <option value="<%= cat.id %>">
+                                            <%= cat.name %>
+                                        </option>
+                                        <% }) %>
                                 </select>
                             </div>
                         </div>
@@ -50,18 +51,7 @@
                                 required style="padding: 10px 0;">
                         </div>
 
-                        <!-- Colores disponibles (Checkboxes) -->
-                        <div class="form-group">
-                            <label>Colores Disponibles (Opcional)</label>
-                            <div class="checkbox-group" style="display: flex; gap: 15px; margin-top: 5px;">
-                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="negro">
-                                    Negro</label>
-                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="blanco">
-                                    Blanco</label>
-                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="gris">
-                                    Gris</label>
-                            </div>
-                        </div>
+                        <!-- Eliminado Checkbox Colores del diseño de base de datos -->
 
                         <!-- Descripción detallada -->
                         <div class="form-group">

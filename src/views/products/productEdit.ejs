@@ -33,14 +33,12 @@
                                 <label for="category">Categoría *</label>
                                 <select id="category" name="category" class="form-control" required
                                     style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
-                                    <option value="celulares" <%=product.category==='celulares' ? 'selected' : '' %>
-                                        >Celulares</option>
-                                    <option value="herramientas" <%=product.category==='herramientas' ? 'selected' : ''
-                                        %>>Herramientas</option>
-                                    <option value="repuestos" <%=product.category==='repuestos' ? 'selected' : '' %>
-                                        >Repuestos</option>
-                                    <option value="accesorios" <%=product.category==='accesorios' ? 'selected' : '' %>
-                                        >Accesorios</option>
+                                    <% categories.forEach(cat=> { %>
+                                        <option value="<%= cat.id %>" <%=product.category_id===cat.id ? 'selected' : ''
+                                            %>>
+                                            <%= cat.name %>
+                                        </option>
+                                        <% }) %>
                                 </select>
                             </div>
                         </div>
@@ -57,17 +55,11 @@
                                 style="padding: 10px 0;">
                         </div>
 
-                        <!-- Colores disponibles -->
+                        <!-- Campo Extra: Stock (Añadido desde Arquitectura MySQL) -->
                         <div class="form-group">
-                            <label>Colores Disponibles</label>
-                            <div class="checkbox-group" style="display: flex; gap: 15px; margin-top: 5px;">
-                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="negro"
-                                        <%=product.colors.includes('negro') ? 'checked' : '' %>> Negro</label>
-                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="blanco"
-                                        <%=product.colors.includes('blanco') ? 'checked' : '' %>> Blanco</label>
-                                <label style="font-weight: normal;"><input type="checkbox" name="colors" value="gris"
-                                        <%=product.colors.includes('gris') ? 'checked' : '' %>> Gris</label>
-                            </div>
+                            <label for="stock">Cantidad en Stock</label>
+                            <input type="number" id="stock" name="stock" value="<%= product.stock %>" min="0"
+                                style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
                         </div>
 
                         <!-- Descripción pre-llenada -->

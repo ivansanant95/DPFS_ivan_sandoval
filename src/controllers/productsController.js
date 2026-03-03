@@ -1,19 +1,24 @@
 const path = require('path');
 const fs = require('fs');
 
+// Requerimos los modelos de Sequelize
+const db = require('../database/models');
+
 const productsController = {
     // Renderiza la vista de Detalles de un producto
-    detail: (req, res) => {
-        const productsFilePath = path.join(__dirname, '../data/products.json');
-        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+    detail: async (req, res) => {
+        try {
+            // Buscar el producto por Clave Primaria (Primary Key) en MySQL
+            const product = await db.Product.findByPk(req.params.id);
 
-        // Buscar el producto por su ID (convirtiendo el string de la URL a número)
-        const product = products.find(p => p.id === parseInt(req.params.id, 10));
-
-        if (product) {
-            res.render('products/productDetail', { product: product });
-        } else {
-            res.status(404).send('Producto no encontrado');
+            if (product) {
+                res.render('products/productDetail', { product: product });
+            } else {
+                res.status(404).send('Producto no encontrado');
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error interno del servidor al consultar la base de datos');
         }
     },
 
@@ -23,96 +28,92 @@ const productsController = {
     },
 
     // Renderiza el formulario de Creación de Producto
-    create: (req, res) => {
-        res.render('products/productCreate');
-    },
-
-    // Procesa el formulario y guarda el nuevo producto
-    store: (req, res) => {
-        const productsFilePath = path.join(__dirname, '../data/products.json');
-        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-
-        // Generar un nuevo ID dinámico (el mayor actual + 1)
-        const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-
-        // Armar el nuevo objeto de producto con los datos del form (req.body)
-        const newProduct = {
-            id: newId,
-            name: req.body.name,
-            description: req.body.description,
-            price: parseFloat(req.body.price),
-            category: req.body.category,
-            // Por ahora simularemos la imagen
-            image: "https://via.placeholder.com/400x400?text=Nuevo+Producto",
-            // Los checkboxes (colors) pueden ser undefined, un string o un array.
-            colors: req.body.colors ? (Array.isArray(req.body.colors) ? req.body.colors : [req.body.colors]) : []
-        };
-
-        // Agregar al array
-        products.push(newProduct);
-
-        // Sobrescribir el archivo JSON con la información actualizada
-        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
-
-        // Redirigir al usuario al listado de productos (Home)
-        res.redirect('/');
-    },
-
-    // Renderiza el formulario de Edición de Producto
-    edit: (req, res) => {
-        const productsFilePath = path.join(__dirname, '../data/products.json');
-        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-        const productToEdit = products.find(p => p.id === parseInt(req.params.id, 10));
-
-        if (productToEdit) {
-            res.render('products/productEdit', { product: productToEdit });
-        } else {
-            res.status(404).send('Producto no encontrado para editar');
+    create: async (req, res) => {
+        try {
+            // Traer todas las categorías para llenar el <select> en EJS
+            const categories = await db.Category.findAll();
+            res.render('products/productCreate', { categories });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error interno del servidor');
         }
     },
 
-    // Procesa los datos editados y sobrescribe el JSON
-    update: (req, res) => {
-        const productsFilePath = path.join(__dirname, '../data/products.json');
-        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-        const productId = parseInt(req.params.id, 10);
-
-        // Encontramos el índice del producto a modificar
-        const index = products.findIndex(p => p.id === productId);
-
-        if (index !== -1) {
-            // Actualizamos solo los campos recibidos, manteniendo ID e Imagen 
-            products[index] = {
-                ...products[index],
+    // Procesa el formulario y guarda el nuevo producto en MySQL
+    store: async (req, res) => {
+        try {
+            // Creamos el producto directamente usando Sequelize
+            await db.Product.create({
                 name: req.body.name,
                 description: req.body.description,
                 price: parseFloat(req.body.price),
-                category: req.body.category,
-                colors: req.body.colors ? (Array.isArray(req.body.colors) ? req.body.colors : [req.body.colors]) : []
-            };
+                category_id: req.body.category, // El name del form debe coincidir
+                stock: 0, // Por ahora harcodeamos un stock inicial
+                image: "https://via.placeholder.com/400x400?text=Nuevo+Producto"
+            });
 
-            // Guardamos el JSON
-            fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
+            // Redirigir al usuario al listado de productos (Home)
+            res.redirect('/');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error al intentar crear el producto en la Base de Datos');
+        }
+    },
+
+    // Renderiza el formulario de Edición de Producto
+    edit: async (req, res) => {
+        try {
+            // Requerimos el producto puntual y de paso todas las categorías
+            const productToEdit = await db.Product.findByPk(req.params.id);
+            const categories = await db.Category.findAll();
+
+            if (productToEdit) {
+                res.render('products/productEdit', { product: productToEdit, categories });
+            } else {
+                res.status(404).send('Producto no encontrado para editar');
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error interno del servidor');
+        }
+    },
+
+    // Procesa los datos editados y sobrescribe SQL
+    update: async (req, res) => {
+        try {
+            const productId = req.params.id;
+
+            // Actualizamos en la base de datos indicando el WHERE
+            await db.Product.update(
+                {
+                    name: req.body.name,
+                    description: req.body.description,
+                    price: parseFloat(req.body.price),
+                    category_id: req.body.category
+                },
+                { where: { id: productId } }
+            );
+
             res.redirect('/products/' + productId); // Redirigimos al detalle para ver los cambios
-        } else {
-            res.status(404).send('No se pudo actualizar el producto');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('No se pudo actualizar el producto');
         }
     },
 
     // Elimina un producto de la base de datos
-    destroy: (req, res) => {
-        const productsFilePath = path.join(__dirname, '../data/products.json');
-        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-        const productId = parseInt(req.params.id, 10);
+    destroy: async (req, res) => {
+        try {
+            await db.Product.destroy({
+                where: { id: req.params.id }
+            });
 
-        // Filtramos: Nos quedamos con todos los productos MENOS el que queremos borrar
-        const remainingProducts = products.filter(p => p.id !== productId);
-
-        // Sobrescribimos el archivo JSON
-        fs.writeFileSync(productsFilePath, JSON.stringify(remainingProducts, null, 2), 'utf-8');
-
-        // Redirigimos al home
-        res.redirect('/');
+            // Redirigimos al home
+            res.redirect('/');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('No se pudo eliminar el producto de MySQL');
+        }
     }
 };
 

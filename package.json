@@ -4,6 +4,7 @@
   "description": "Bienvenido al repositorio oficial de **Reparatech**, un e-commerce integral dedicado al ecosistema de la telefonía móvil, desarrollado como parte del proyecto final Full Stack en Digital House.",
   "main": "index.js",
   "scripts": {
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

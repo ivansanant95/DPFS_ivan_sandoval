@@ -33,3 +33,40 @@ Para garantizar la mejor experiencia de usuario (UX) y una interfaz de usuario (
 3. **[BackMarket](https://www.backmarket.com/):** Elegido por su estética fresca y moderna orientada a la venta de equipos reacondicionados.
 4. **[El Celu](https://www.elcelu.com.ar/):** Elegido como referente local por la categorización y presentación de sus productos tecnológicos.
 5. **[Todo Celu Repuestos](https://tienda.todocelurepuestos.com.ar/):** Elegido por ser un referente directo en la venta de insumos en Argentina, destacando su organización de repuestos por marca y modelo. 
+
+---
+
+## Instrucciones para Usuarios
+
+Para probar las funcionalidades de **Reparatech**, sigue estas instrucciones:
+
+### 1. Inicio del Servidor
+* Clonar el repositorio `git clone https://github.com/ivansanant95/DPFS_ivan_sandoval.git`
+* Ejecutar `npm install`.
+* Configurar la base de datos `reparatech_db` usando los scripts en `src/data/`, primero ejecutar el script `src/data/structure.sql` y luego el script `src/data/data.sql`.
+* Configurar las credenciales en `src/database/config.js`.
+* Iniciar la aplicación: `npm start` o `node src/app.js`.
+* Acceder a: `http://localhost:3000`.
+
+### 2. Cuentas de Prueba
+|       Rol         |         Email          | Contraseña  |          Permisos         |
+| **Administrador** | `admin@reparatech.com` | `admin123`* | CRUD completo + Dashboard |
+| **Cliente**       | `maria@mail.com`       | `admin123`* | Compra, Perfil y Carrito  |
+
+> [!NOTA]
+> Puedes crear un nuevo usuario fácilmente desde la sección de **Registro**.
+
+### 3. Flujos 
+* **Flujo de Usuario**: Registro de nueva cuenta -> Login -> Edición de Perfil -> Navegación de Productos.
+* **Flujo de Compra**: Agregar productos al carrito y visualizar el resumen.
+* **Flujo Admin**: Login como administrador -> Acceso al Panel de Control -> Crear/Editar/Eliminar un producto.
+
+### 4. Visualización del Dashboard
+* Abre una nueva terminal y navega a la carpeta: `cd dashboard`.
+* Ejecutar `npm install`.
+* Ejecuta `npm run dev`.
+* Accede a la URL `http://localhost:5173`.
+* Iniciar sesión con el usuario administrador: `admin@reparatech.com` y `admin123`.
+
+> [!NOTA]
+> El Dashboard consume la API de Reparatech (`http://localhost:3000/api`), por lo que el servidor principal debe estar activo para ver los datos.

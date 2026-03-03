@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', { title: title , cssFile: 'home.css' }) %>
+
+    <body>
+        <%- include('../partials/header') %>
+
+            <main>
+                <div
+                    style="max-width: 800px; margin: 40px auto; padding: 30px; background: var(--surface-main); border-radius: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <i class="fa-solid fa-screwdriver-wrench"
+                            style="font-size: 64px; color: var(--primary-color);"></i>
+                        <h1 style="color: var(--text-main); font-size: 32px; margin-top: 20px;">
+                            <%= service.name %>
+                        </h1>
+                    </div>
+
+                    <div
+                        style="display: flex; gap: 40px; border-top: 1px solid var(--border-light); padding-top: 30px; margin-bottom: 30px;">
+                        <!-- Columna Info -->
+                        <div style="flex: 2;">
+                            <h3
+                                style="color: var(--text-main); font-size: 20px; font-weight: 600; margin-bottom: 15px;">
+                                Descripción del Servicio</h3>
+                            <p style="color: var(--text-light); line-height: 1.6; font-size: 16px;">
+                                <%= service.description %>
+                            </p>
+
+                            <h3
+                                style="color: var(--text-main); font-size: 20px; font-weight: 600; margin-top: 30px; margin-bottom: 15px;">
+                                Garantía y Condiciones</h3>
+                            <ul style="color: var(--text-light); padding-left: 20px; line-height: 1.6;">
+                                <li>Repuestos originales o de máxima calidad OEM.</li>
+                                <li>Técnicos certificados.</li>
+                                <li>Equipo encriptado y seguro mientras dure la estadía.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Columna Pago/Turno -->
+                        <div
+                            style="flex: 1; min-width: 280px; background: var(--bg-body); padding: 25px; border-radius: 8px; border: 1px solid var(--border-light);">
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div>
+                                    <span
+                                        style="font-size: 12px; color: var(--text-light); font-weight: bold; text-transform: uppercase;">Precio
+                                        Estimado</span>
+                                    <div style="font-size: 36px; font-weight: 800; color: var(--text-main);">$<%=
+                                            Number(service.price).toFixed(2) %>
+                                    </div>
+                                </div>
+
+                                <div
+                                    style="display: flex; align-items: center; gap: 10px; color: var(--primary-color);">
+                                    <i class="fa-regular fa-clock" style="font-size: 20px;"></i>
+                                    <div>
+                                        <span
+                                            style="display: block; font-size: 12px; color: var(--text-light);">Urgencia
+                                            Estimada</span>
+                                        <span style="font-weight: 600;">
+                                            <%= service.estimated_time %>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <button class="btn-primary"
+                                    style="width: 100%; border-radius: 8px; padding: 15px; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                    <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Consultar Turno
+                                </button>
+                                <a href="/services" class="btn-secondary"
+                                    style="text-align: center; border-radius: 8px; padding: 10px;">Volver Listado</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('../partials/footer') %>
+    </body>
+
+</html>

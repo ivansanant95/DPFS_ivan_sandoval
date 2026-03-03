@@ -139,12 +139,20 @@ const usersController = {
                 imageFile = req.file.filename;
             }
 
-            await db.User.update({
+            const updateData = {
                 first_name: req.body.firstName,
                 last_name: req.body.lastName,
+                email: req.body.email,
                 phone: req.body.phone,
                 image: imageFile
-            }, {
+            };
+
+            // Si el usuario ingresó una nueva contraseña, la hasheamos y la incluimos
+            if (req.body.password && req.body.password.trim() !== '') {
+                updateData.password = bcrypt.hashSync(req.body.password, 10);
+            }
+
+            await db.User.update(updateData, {
                 where: { id: userId }
             });
 
@@ -153,6 +161,7 @@ const usersController = {
                 ...req.session.userLogged,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
+                email: req.body.email,
                 phone: req.body.phone,
                 image: imageFile
             };

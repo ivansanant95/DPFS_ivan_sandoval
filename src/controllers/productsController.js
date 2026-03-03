@@ -28,6 +28,35 @@ const productsController = {
         res.render('products/productCart');
     },
 
+    // Renderiza el listado filtrado por Categoría
+    byCategory: async (req, res) => {
+        try {
+            const categoryId = req.params.categoryId;
+
+            // Buscar la categoría para obtener su nombre (sirve para el título de la vista)
+            const category = await db.Category.findByPk(categoryId);
+
+            if (!category) {
+                return res.status(404).send('Categoría no encontrada');
+            }
+
+            // Buscar todos los productos que pertenezcan a esa category_id
+            const products = await db.Product.findAll({
+                where: { category_id: categoryId }
+            });
+
+            // Renderizar la NUEVA vista pasándole nombre de la categoría y los productos filtrados
+            res.render('products/productList', {
+                title: `${category.name} - Reparatech`,
+                categoryName: category.name,
+                products: products
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error interno del servidor al filtrar categorías');
+        }
+    },
+
     // Renderiza el formulario de Creación de Producto
     create: async (req, res) => {
         try {

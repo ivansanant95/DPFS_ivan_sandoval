@@ -1,20 +1,46 @@
 /* =========================================
-   VARIABLES GLOBALES (Paleta y Tipografía)
+   VARIABLES GLOBALES
    ========================================= */
 :root {
-  /* Paleta de Colores Azul Tech y Naranja/Amarillo */
-  --primary-color: #0056b3;
-  --primary-hover: #003d82;
-  --secondary-color: #ff9900;
-  --secondary-hover: #e68a00;
-  --bg-color: #f8f9fa;
-  --text-main: #333333;
-  --text-light: #666666;
-  --white: #ffffff;
-  --border-color: #e0e0e0;
+  /* Paleta de Colores Azul Tech y Naranja Oscuro */
+  --primary-color: #1e40af;
+  /* Azul vibrante premium */
+  --primary-hover: #1e3a8a;
+  --secondary-color: #ea580c;
+  /* Naranja tech / acento */
+  --secondary-hover: #c2410c;
 
-  /* Tipografía Original */
-  --font-main: 'Roboto', sans-serif;
+  /* Fondos y superficies */
+  --bg-color: #f8fafc;
+  /* Gris/Azul muy claro (Background) */
+  --surface-main: #ffffff;
+  /* Blanco puro para tarjetas */
+  --surface-hover: #f1f5f9;
+
+  /* Textos y Bordes */
+  --text-main: #1e293b;
+  /* Gris texto principal */
+  --text-light: #64748b;
+  /* Gris texto secundario */
+  --border-color: #e2e8f0;
+
+  /* Tipografía Moderna */
+  --font-main: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+
+  /* Sombras Modernas (Soft Shadows) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Bordes redondeados */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-pill: 9999px;
+
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 }
 
 /* =========================================
@@ -34,11 +60,25 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  /* Suavizado de fuente premium */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-main);
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  transition: color var(--transition-fast);
 }
 
 ul {
@@ -46,14 +86,15 @@ ul {
 }
 
 /* =========================================
-   HEADER y NAVEGACIÓN 
+   HEADER y NAVEGACIÓN PREMIUM
    ========================================= */
 .main-header {
-  background-color: var(--white);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-main);
+  box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-top {
@@ -63,82 +104,110 @@ ul {
   padding: 15px 5%;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 15px;
+  gap: 20px;
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
   color: var(--primary-color);
+  letter-spacing: -0.5px;
 }
 
 .logo span {
   color: var(--secondary-color);
 }
 
+/* Barra de búsqueda estilo "Pill" */
 .search-bar {
   display: flex;
   flex-grow: 1;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 20px;
+  background-color: var(--bg-color);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  /* Para el focus ring */
+  transition: all var(--transition-normal);
+}
+
+.search-bar:focus-within {
+  background-color: var(--surface-main);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
 }
 
 .search-bar input {
   width: 100%;
-  padding: 10px 15px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px 0 0 4px;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
   outline: none;
+  font-family: var(--font-main);
+  color: var(--text-main);
+  font-size: 15px;
+}
+
+.search-bar input::placeholder {
+  color: var(--text-light);
 }
 
 .search-bar button {
-  padding: 10px 20px;
-  background-color: var(--secondary-color);
+  padding: 10px 24px;
+  margin: 4px;
+  background-color: var(--primary-color);
   color: var(--white);
   border: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  font-family: var(--font-main);
+  transition: background-color var(--transition-fast);
 }
 
 .search-bar button:hover {
-  background-color: var(--secondary-hover);
+  background-color: var(--primary-hover);
 }
 
+/* Botones de Usuario Premium */
 .user-actions {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   align-items: center;
 }
 
 .user-actions a {
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: all 0.3s;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-login {
   color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  background-color: rgba(30, 64, 175, 0.05);
 }
 
 .btn-login:hover {
-  background-color: var(--primary-color);
-  color: var(--white);
+  background-color: rgba(30, 64, 175, 0.1);
 }
 
 .btn-cart {
-  background-color: var(--primary-color);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  background-color: var(--secondary-color);
+  color: var(--white) !important;
+  box-shadow: var(--shadow-sm);
+  gap: 6px;
 }
 
 .btn-cart:hover {
-  background-color: var(--primary-hover);
+  background-color: var(--secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* FIX RESPONSIVO PARA EL HEADER */
@@ -146,6 +215,7 @@ ul {
   .header-top {
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 15px;
   }
 
   .logo {
@@ -160,32 +230,51 @@ ul {
     order: 3;
     width: 100%;
     max-width: none;
-    margin: 10px 0 0 0;
+    margin: 15px 0 0 0;
   }
 }
 
 .main-nav {
   background-color: var(--primary-color);
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  /* Sombra interior sutil */
 }
 
 .nav-links {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 10px 5%;
+  gap: 32px;
+  padding: 12px 5%;
   flex-wrap: wrap;
-  /* Para que no se rompa en pantallas chicas */
 }
 
 .nav-links a {
-  color: var(--white);
+  color: var(--surface-hover);
   font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-color);
+  transition: width var(--transition-normal);
 }
 
 .nav-links a:hover {
-  color: var(--secondary-color);
+  color: var(--white);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 /* =========================================
@@ -196,16 +285,20 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  padding: 20px 5%;
+  padding: 40px 5%;
+  /* Más respiro vertical */
 }
 
 /* =========================================
-   FOOTER
+   FOOTER PREMIUM
    ========================================= */
 .main-footer {
-  background-color: #222;
-  color: #ccc;
-  padding: 40px 5% 20px;
+  background-color: #0f172a;
+  /* Slate 900 (Azul muy oscuro) */
+  color: #94a3b8;
+  /* Slate 400 (Gris claro) */
+  padding: 60px 5% 20px;
+  margin-top: auto;
 }
 
 .footer-content {
@@ -214,20 +307,27 @@ main {
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 20px;
+  gap: 40px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
 }
 
 .footer-section h3 {
   color: var(--white);
-  margin-bottom: 15px;
-  font-size: 16px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .footer-section p,
 .footer-section a {
-  font-size: 14px;
+  font-size: 15px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  transition: color var(--transition-fast);
 }
 
 .footer-section a:hover {
@@ -236,8 +336,8 @@ main {
 
 .footer-bottom {
   text-align: center;
-  padding-top: 20px;
-  margin-top: 20px;
-  border-top: 1px solid #444;
-  font-size: 12px;
+  padding-top: 24px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
 }

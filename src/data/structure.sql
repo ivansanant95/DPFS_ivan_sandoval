@@ -39,7 +39,18 @@ CREATE TABLE `products` (
     FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`)
 );
 
--- 4. Creación del módulo transaccional (Carrito)
+-- 4. Creación del módulo de Servicios Independientes
+CREATE TABLE `services` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(150) NOT NULL,
+    `description` TEXT,
+    `estimated_time` VARCHAR(50),
+    `price` DECIMAL(10,2) NOT NULL,
+    `discount` INT DEFAULT 0,
+    `image` VARCHAR(255) DEFAULT 'default-service.png'
+);
+
+-- 5. Creación del módulo transaccional (Carrito)
 CREATE TABLE `carts` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `total_price` DECIMAL(10,2) DEFAULT 0,

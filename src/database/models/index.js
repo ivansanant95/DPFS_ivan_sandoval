@@ -13,6 +13,7 @@ db.Category = require('./Category')(sequelize, Sequelize.DataTypes);
 db.Product = require('./Product')(sequelize, Sequelize.DataTypes);
 db.Cart = require('./Cart')(sequelize, Sequelize.DataTypes);
 db.CartProduct = require('./CartProduct')(sequelize, Sequelize.DataTypes);
+db.Service = require('./Service')(sequelize, Sequelize.DataTypes);
 
 // 2. Ejecutar Asociaciones (Relaciones entre tablas)
 Object.keys(db).forEach(modelName => {

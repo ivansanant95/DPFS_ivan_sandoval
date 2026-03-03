@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Cambio de Pantalla Original",
+    "description": "Reemplazo del módulo frontal completo con repuesto original.",
+    "estimated_time": "2 - 4 Horas",
+    "price": "90.00",
+    "discount": 0,
+    "image": "default-service.png"
+  },
+  {
+    "id": 2,
+    "name": "Reemplazo de Batería OEM",
+    "description": "Cambio por repuesto nuevo.",
+    "estimated_time": "1 Hora",
+    "price": "45.00",
+    "discount": 10,
+    "image": "default-service.png"
+  }
+]

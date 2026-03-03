@@ -23,6 +23,7 @@ const adminMiddleware = require('../middlewares/adminMiddleware');
 // Rutas de Productos
 router.get('/products/create', adminMiddleware, productsController.create);
 router.post('/products', adminMiddleware, uploadFile.single('image'), productValidation, productsController.store);
+router.get('/products/category/:categoryId', productsController.byCategory);
 router.get('/products/:id/edit', adminMiddleware, productsController.edit);
 router.put('/products/:id', adminMiddleware, uploadFile.single('image'), productValidation, productsController.update);
 router.delete('/products/:id', adminMiddleware, productsController.destroy);

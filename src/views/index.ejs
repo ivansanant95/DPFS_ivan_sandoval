@@ -54,7 +54,7 @@
                                                         </span>
                                                         <% } else { %>
                                                             <span class="price">$<%= Number(product.price).toFixed(2) %>
-                                                                    </span>
+                                                            </span>
                                                             <% } %>
                                                 </div>
 
@@ -66,18 +66,21 @@
                                                             style="margin: 0;">
                                                             <input type="hidden" name="quantity" value="1">
                                                             <button type="submit" class="btn-primary"
-                                                                style="padding: 12px 15px; border-radius: 12px;">🛒</button>
+                                                                style="padding: 12px 15px; border-radius: 12px;"><i
+                                                                    class="fa-solid fa-cart-shopping"></i></button>
                                                         </form>
                                                     </div>
                                                     <% } else { %>
                                                         <div style="display: flex; gap: 10px; margin-top: auto;">
                                                             <a href="/products/<%= product.id %>/edit"
-                                                                class="btn-secondary" style="flex: 1;">✏️ Editar</a>
+                                                                class="btn-secondary" style="flex: 1;"><i
+                                                                    class="fa-solid fa-pen-to-square"></i> Editar</a>
                                                             <form action="/products/<%= product.id %>?_method=DELETE"
                                                                 method="POST" style="margin: 0;">
                                                                 <button type="submit" class="btn-secondary"
                                                                     style="background: rgba(231, 76, 60, 0.1); color: #e74c3c; border-color: rgba(231, 76, 60, 0.2);"
-                                                                    onclick="return confirm('¿Eliminar producto?')">🗑️</button>
+                                                                    onclick="return confirm('¿Eliminar producto?')"><i
+                                                                        class="fa-solid fa-trash-can"></i></button>
                                                             </form>
                                                         </div>
                                                         <% } %>

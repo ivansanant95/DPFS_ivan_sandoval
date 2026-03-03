@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Celulares",
+    "description": "Smartphones y teléfonos móviles"
+  },
+  {
+    "id": 3,
+    "name": "Repuestos",
+    "description": "Pantallas, baterías, pines de carga y componentes"
+  },
+  {
+    "id": 6,
+    "name": "Herramientas",
+    "description": "Herramientas e insumos para técnicos"
+  }
+]

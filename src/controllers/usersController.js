@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 
+const { validationResult } = require('express-validator');
 const db = require('../database/models');
 
 const usersController = {
@@ -13,6 +14,15 @@ const usersController = {
     // Procesa el inicio de sesión
     processLogin: async (req, res) => {
         try {
+            // Evaluamos si el Escudo de Validación Backend fue quebrado
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.render('users/login', {
+                    errors: errors.mapped(),
+                    oldData: req.body
+                });
+            }
+
             // Buscar al usuario por email en la BD
             const userToLogin = await db.User.findOne({
                 where: { email: req.body.email }
@@ -65,15 +75,16 @@ const usersController = {
     // Procesa la creación de un nuevo usuario
     processRegister: async (req, res) => {
         try {
-            // Validación temporal: Verificar que el email no exista ya en la Base de Datos
-            const existingUser = await db.User.findOne({ where: { email: req.body.email } });
-            if (existingUser) {
-                // Si el correo ya existe, devolvemos a la vista con un mensaje amigable
+            // Atrapamos cualquier error generado por Express Validator (Ej: pass muy corto, sin email...)
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
                 return res.render('users/register', {
-                    errors: { email: { msg: 'Este correo electrónico ya se encuentra registrado' } },
-                    oldData: req.body // Mantenemos los datos escritos por el usuario (Opcional, según diseño de tu EJS)
+                    errors: errors.mapped(),  // Mapeamos a objeto literal { email: { msg: '...' } }
+                    oldData: req.body         // Mantenemos lo que el usuario había tipeado
                 });
             }
+
+            // (El middleware de Validacion de email duplicado lo dejamos delegado a express-validator, ya no crashea acá)
 
             // Verificar si el middleware Multer subió un archivo, sino enviamos foto por defecto
             let imageFile = 'default-avatar.png';
